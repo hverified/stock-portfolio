@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    base: "/",
+    historyApiFallback: true,  // This will ensure that all routes fallback to index.html
     host: '0.0.0.0',  // Expose the app to other devices on the network
     port: 3000,        // Port number for the app (you can change this if needed)
     open: true,        // Automatically open the app in your default browser

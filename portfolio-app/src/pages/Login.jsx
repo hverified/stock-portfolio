@@ -21,12 +21,12 @@ const Login = () => {
     return (
         <div className="flex justify-center items-center h-screen bg-gray-50">
             <div className="bg-white p-8 rounded-lg shadow-xl w-96 max-w-sm">
-                <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Welcome Back</h2>
+                <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Welcome Back!</h2>
                 <div className="mb-6">
-                    <label className="block text-lg font-medium text-gray-700 mb-2">Email</label>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">Username</label>
                     <div className="relative">
                         <input
-                            type="Username"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
