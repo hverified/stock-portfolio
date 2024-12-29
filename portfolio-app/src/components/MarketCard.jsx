@@ -25,8 +25,8 @@ const MarketCard = () => {
     useEffect(() => {
         const fetchMarketData = async () => {
             try {
-                const response = await axios.get("https://stock-portfolio-yswg.onrender.com/market/market-summary"
-                    // `${import.meta.env.VITE_API_BASE_URL}/market/market-summary`
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_BASE_URL}/market/market-summary`
                 );
 
                 const { nifty_50, sensex } = response.data;
