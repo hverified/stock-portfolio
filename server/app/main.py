@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, bank, portfolio, market
 from app.core.config import settings
 
@@ -15,6 +16,14 @@ app = FastAPI(
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
     docs_url=settings.DOCS_URL,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CLIENT_URL.split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 # Register the routes
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
