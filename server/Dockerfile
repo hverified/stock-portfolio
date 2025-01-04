@@ -41,7 +41,7 @@ ENV CHROME_BIN=/usr/bin/chromium
 # ENV CHROME_BIN=/usr/bin/chromium-browser
 
 RUN which chromium || which chromium-browser || echo "Chromium not found"
-
+RUN ls /usr/bin
 # Set up a directory for your app
 WORKDIR /app
 

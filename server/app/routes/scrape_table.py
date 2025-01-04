@@ -24,7 +24,7 @@ def scrape_table_to_json(url: str, table_id: str):
     # chrome_options.binary_location = os.environ.get("CHROME_BIN", "/usr/bin/chromium")
 
     # Dynamically set the binary path
-    CHROME_BINARY_LOCATIONS = ["/usr/bin/chromium", "/usr/bin/chromium-browser"]
+    CHROME_BINARY_LOCATIONS = ["/usr/bin/chromium", "/usr/bin/chromedriver"]
     chrome_binary = next(
         (path for path in CHROME_BINARY_LOCATIONS if os.path.exists(path)), None
     )
