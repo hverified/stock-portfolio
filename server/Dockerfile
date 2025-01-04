@@ -45,6 +45,8 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 RUN /usr/bin/chromedriver --version
 RUN /usr/bin/chromium --version
+RUN chmod +x /usr/bin/chromedriver
+RUN chmod +x /usr/bin/chromium
 # Copy your entire project into the Docker container
 COPY . /app/
 
