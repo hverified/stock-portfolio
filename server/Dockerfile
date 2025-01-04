@@ -43,7 +43,8 @@ WORKDIR /app
 # Copy the requirements file and install Python dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN /usr/bin/chromedriver --version
+RUN /usr/bin/chromium --version
 # Copy your entire project into the Docker container
 COPY . /app/
 
