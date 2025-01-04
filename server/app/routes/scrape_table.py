@@ -32,7 +32,7 @@ def scrape_table_to_json(url: str, table_id: str):
     # if not chrome_binary:
     #     raise Exception("Chromium binary not found in the expected locations.")
 
-    service = Service("usr/bin/chromedriver")
+    service = Service("/usr/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     try:
