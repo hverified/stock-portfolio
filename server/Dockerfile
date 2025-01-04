@@ -13,7 +13,6 @@ RUN apt-get update && \
     libx11-dev \
     libxss1 \
     libappindicator3-1 \
-    libindicator3-0.7 \
     fonts-liberation \
     libnspr4-dev \
     libnss3-dev \
