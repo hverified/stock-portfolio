@@ -3,8 +3,6 @@ import axios from "axios";
 
 const MarketCard = () => {
     const [marketData, setMarketData] = useState(() => {
-        // Fetch previous data from localStorage if available
-        console.log(`${import.meta.env.VITE_API_BASE_URL}/market/market-summary`);
         const savedData = localStorage.getItem("marketData");
         return savedData
             ? JSON.parse(savedData)
@@ -50,7 +48,6 @@ const MarketCard = () => {
                     },
                 };
 
-                // Update state and save to localStorage
                 setMarketData(updatedData);
                 localStorage.setItem("marketData", JSON.stringify(updatedData));
             } catch (error) {
@@ -59,7 +56,7 @@ const MarketCard = () => {
         };
 
         fetchMarketData();
-    }, []); // Runs only on initial render
+    }, []);
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-md">
