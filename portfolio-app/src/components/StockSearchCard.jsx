@@ -35,7 +35,7 @@ const StockSearchCard = () => {
 
         try {
             const response = await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/market/market-cap?index_symbol=${ticker}`
+                `${import.meta.env.VITE_API_BASE_URL}/market/stock-detail?index_symbol=${ticker}`
             );
 
             setMarketData(response.data);

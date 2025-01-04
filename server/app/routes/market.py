@@ -91,8 +91,8 @@ async def get_market_summary():
         raise HTTPException(status_code=500, detail="Error fetching market data")
 
 
-@router.post("/market-cap")
-async def get_market_cap(index_symbol: str):
+@router.post("/stock-detail")
+async def get_stock_detail(index_symbol: str):
     try:
         index_symbol = f"{index_symbol.upper()}.NS"
 
