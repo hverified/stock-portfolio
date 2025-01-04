@@ -30,6 +30,7 @@ RUN apt-get update && \
 
 # Set the environment variable for headless chrome
 ENV CHROME_BIN=/usr/bin/chromium
+RUN which chromium || which chromium-browser || echo "Chromium not found"
 
 # Set up a directory for your app
 WORKDIR /app
