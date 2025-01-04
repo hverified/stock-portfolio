@@ -2,16 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, bank, portfolio, market, scrape_table
 from app.core.config import settings
-import os
-from contextlib import asynccontextmanager
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    os.system("apt-get update && apt-get install -y chromium")
-    yield
-    pass
-
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -26,7 +16,6 @@ app = FastAPI(
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
     docs_url=settings.DOCS_URL,
-    lifespan=lifespan,
 )
 
 
