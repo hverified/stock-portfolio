@@ -34,16 +34,11 @@ RUN apt-get update && \
     --no-install-recommends && \
     apt-get clean
 
-RUN apt-get update && \
-    apt-get install -y \
-    chromium-browser \
-    --no-install-recommends && \
-    apt-get clean
 
 # Set the environment variable for headless chrome
-# ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_BIN=/usr/bin/chromium
 # Set the correct path to the Chromium binary
-ENV CHROME_BIN=/usr/bin/chromium-browser
+# ENV CHROME_BIN=/usr/bin/chromium-browser
 
 RUN which chromium || which chromium-browser || echo "Chromium not found"
 
