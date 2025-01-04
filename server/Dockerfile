@@ -36,11 +36,11 @@ ENV CHROME_BIN=/usr/bin/chromium
 WORKDIR /app
 
 # Copy the requirements file and install Python dependencies
-COPY server/requirements.txt /app/
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy your entire project into the Docker container
-COPY server /app/
+COPY . /app/
 
 # Expose the port that FastAPI runs on
 EXPOSE 8000
