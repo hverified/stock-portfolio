@@ -21,20 +21,18 @@ def scrape_table_to_json(url: str, table_id: str):
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    # chrome_options.binary_location = os.environ.get("CHROME_BIN", "/usr/bin/chromium")
+    chrome_options.binary_location = "/usr/bin/chromium"
 
     # Dynamically set the binary path
-    CHROME_BINARY_LOCATIONS = ["/usr/bin/chromium", "/usr/bin/chromedriver"]
-    chrome_binary = next(
-        (path for path in CHROME_BINARY_LOCATIONS if os.path.exists(path)), None
-    )
+    # CHROME_BINARY_LOCATIONS = ["/usr/bin/chromium", "/usr/bin/chromedriver"]
+    # chrome_binary = next(
+    #     (path for path in CHROME_BINARY_LOCATIONS if os.path.exists(path)), None
+    # )
 
-    if not chrome_binary:
-        raise Exception("Chromium binary not found in the expected locations.")
+    # if not chrome_binary:
+    #     raise Exception("Chromium binary not found in the expected locations.")
 
-    chrome_options.binary_location = chrome_binary
-
-    service = Service(ChromeDriverManager().install())
+    service = Service("usr/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     try:

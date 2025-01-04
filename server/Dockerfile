@@ -8,6 +8,7 @@ RUN apt-get update && \
     curl \
     unzip \
     chromium \
+    chromium-driver \
     libgconf-2-4 \
     libnss3 \
     libx11-dev \
@@ -28,19 +29,13 @@ RUN apt-get update && \
     --no-install-recommends && \
     apt-get clean
 
-RUN apt-get update && \
-    apt-get install -y \
-    chromium \
-    --no-install-recommends && \
-    apt-get clean
-
 
 # Set the environment variable for headless chrome
 ENV CHROME_BIN=/usr/bin/chromium
 # Set the correct path to the Chromium binary
-# ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 
-RUN which chromium || which chromium-browser || echo "Chromium not found"
+RUN which chromium || which chromium-browser || which chromedriver || echo "Chromium not found"
 RUN ls /usr/bin
 # Set up a directory for your app
 WORKDIR /app
