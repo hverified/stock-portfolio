@@ -80,7 +80,7 @@ const StockSearchCard = () => {
                 <button
                     onClick={handleSearch}
                     disabled={loading}
-                    className={`w-full py-3 rounded-lg font-semibold transition duration-300 ease-in-out ${loading
+                    className={`w-full py-3 rounded-full font-semibold transition duration-300 ease-in-out ${loading
                         ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                         : "bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600"
                         }`}
