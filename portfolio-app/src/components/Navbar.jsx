@@ -16,6 +16,17 @@ const Navbar = () => {
                 <p className="text-xs">Home</p>
             </NavLink>
             <NavLink
+                to="/scanner"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-primary font-semibold transform scale-110 transition-all duration-300"
+                        : "text-gray-500 hover:text-primary hover:scale-105 transform transition-all duration-300"
+                }
+            >
+                <i className="fas fa-brands fa-searchengin text-2xl mb-1"></i>
+                <p className="text-xs">Scanner</p>
+            </NavLink>
+            <NavLink
                 to="/orders"
                 className={({ isActive }) =>
                     isActive
@@ -25,17 +36,6 @@ const Navbar = () => {
             >
                 <i className="fa-solid fa-book text-2xl mb-1"></i>
                 <p className="text-xs">Orders</p>
-            </NavLink>
-            <NavLink
-                to="/basket"
-                className={({ isActive }) =>
-                    isActive
-                        ? "text-primary font-semibold transform scale-110 transition-all duration-300"
-                        : "text-gray-500 hover:text-primary hover:scale-105 transform transition-all duration-300"
-                }
-            >
-                <i className="fas fa-cart-plus text-2xl mb-1"></i>
-                <p className="text-xs">Basket</p>
             </NavLink>
             <NavLink
                 to="/profile"

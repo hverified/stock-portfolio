@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import Orders from "./pages/Orders";
-import Basket from "./pages/Basket";
+import Scanner from "./pages/Scanner";
 import Login from "./pages/Login";  // Import Login page
 import { useAuth } from "./context/AuthContext"; // Import useAuth hook
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -21,7 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
           <Route path="/orders" element={isAuthenticated ? <Orders /> : <Login />} />
-          <Route path="/basket" element={isAuthenticated ? <Basket /> : <Login />} />
+          <Route path="/scanner" element={isAuthenticated ? <Scanner /> : <Login />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login />} />
           <Route path="/login" element={<Login />} />
         </Routes>
