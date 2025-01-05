@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Header from "../components/Header";
 
 const Scanner = () => {
     const [scanners, setScanners] = useState(["BTST Scanner"]);
@@ -60,14 +61,8 @@ const Scanner = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <div className="flex justify-end mb-4">
-                <button
-                    className="px-4 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600"
-                >
-                    + Scanner
-                </button>
-            </div>
+        <div className="p-4 space-y-6 pb-20">
+            <Header />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {scanners.map((scanner, index) => (
                     <div
@@ -178,6 +173,15 @@ const Scanner = () => {
                     </div>
                 </div>
             )}
+            <div className="relative">
+                <div className="fixed bottom-16 right-4">
+                    <button
+                        className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
+                    >
+                        + Scanner
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };
