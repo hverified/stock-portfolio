@@ -17,6 +17,7 @@ const MarketCard = () => {
                     change: 0,
                     percentChange: 0,
                 },
+                lastUpdatedAt: localStorage.getItem("lastUpdatedAt"),
             };
     });
 
@@ -46,6 +47,7 @@ const MarketCard = () => {
                                 sensex.previous_close) *
                             100,
                     },
+                    lastUpdatedAt: new Date(),
                 };
 
                 setMarketData(updatedData);
@@ -61,6 +63,13 @@ const MarketCard = () => {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-secondary">Market Overview</h3>
+            <p className="text-sm text-gray-500">
+                Last updated at{" "}
+                {new Date(marketData.lastUpdatedAt).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                })}
+            </p>
 
             <div className="flex justify-between items-center gap-2 mt-4">
                 {/* Nifty50 Data */}

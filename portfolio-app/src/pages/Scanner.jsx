@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 
@@ -9,19 +9,43 @@ const Scanner = () => {
     const [loading, setLoading] = useState(false);
     const [expandedRow, setExpandedRow] = useState(null);
     const [stockDetails, setStockDetails] = useState({});
+    const [lastUpdatedAt, setLastUpdatedAt] = useState("");
+    const [amtPerTrade, setAmtPerTrade] = useState(10000);
+
+    useEffect(() => {
+        const savedLastUpdatedAt = localStorage.getItem("lastUpdatedAt");
+        if (savedLastUpdatedAt) {
+            setLastUpdatedAt(savedLastUpdatedAt);
+        }
+    }, []);
 
     const fetchScannedStocks = async () => {
         setLoading(true);
         try {
             const requestBody = {
-                url: "https://chartink.com/screener/btst-ema-rsi-volume-2",
+                url: `${import.meta.env.VITE_API_SCRAPE_TABLE_URL}`,
                 table_id: "DataTables_Table_0",
             };
 
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/scrape/table`, requestBody);
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_BASE_URL}/scrape/table`,
+                requestBody
+            );
+
             setScannedStocks(response.data.data);
+
+            // Save the last updated time on success
+            const updatedTime = new Date().toLocaleString();
+            setLastUpdatedAt(updatedTime);
+            localStorage.setItem("lastUpdatedAt", updatedTime);
         } catch (error) {
             console.error("Error fetching scanned stocks:", error);
+
+            // Use the last updated time from localStorage on failure
+            const savedLastUpdatedAt = localStorage.getItem("lastUpdatedAt");
+            if (savedLastUpdatedAt) {
+                setLastUpdatedAt(savedLastUpdatedAt);
+            }
         } finally {
             setLoading(false);
         }
@@ -30,6 +54,11 @@ const Scanner = () => {
     const handleCardClick = (scanner) => {
         setSelectedScanner(scanner);
         fetchScannedStocks();
+    };
+
+    const handleInputChange = (e) => {
+        const input = e.target.value;
+        setAmtPerTrade(input);
     };
 
     const closeModal = () => {
@@ -49,7 +78,9 @@ const Scanner = () => {
         }
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/market/stock-detail?index_symbol=${symbol}`);
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_BASE_URL}/market/stock-detail?index_symbol=${symbol}`
+            );
             setStockDetails((prevDetails) => ({
                 ...prevDetails,
                 [symbol]: response.data,
@@ -63,6 +94,19 @@ const Scanner = () => {
     return (
         <div className="p-4 space-y-6 pb-20">
             <Header />
+            <div className="flex items-center space-x-2">
+                <label htmlFor="amountPerTrade">
+                    Amt/Trade: ₹
+                </label>
+                <input
+                    id="amountPerTrade"
+                    type="text"
+                    placeholder="Enter amount per trade"
+                    value={amtPerTrade}
+                    onChange={handleInputChange}
+                    className="p-3 rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+                />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {scanners.map((scanner, index) => (
                     <div
@@ -100,6 +144,11 @@ const Scanner = () => {
                             </div>
                         </div>
 
+                        {/* Last Updated At */}
+                        <div className="text-sm text-gray-500 mb-4">
+                            Last Updated At: {lastUpdatedAt || "Not Available"}
+                        </div>
+
                         {/* Content */}
                         {loading ? (
                             <div className="flex justify-center items-center flex-grow">
@@ -124,7 +173,11 @@ const Scanner = () => {
                                                 >
                                                     <td className="border-b py-2 text-xs px-4">{stock?.Symbol}</td>
                                                     <td className="border-b py-2 text-xs px-4">₹{stock?.Price}</td>
-                                                    <td className="border-b py-2 text-xs px-4 text-green-500">{stock?.["% Chg"]}</td>
+                                                    <td className={`border-b py-2 text-xs px-4 
+                                                        ${stock?.["% Chg"].includes("-") ? "text-red-500" :
+                                                            parseFloat(stock?.["% Chg"].replace("%", "")) >= 7 || parseFloat(stock?.["% Chg"].replace("%", "")) <= 1 ?
+                                                                "text-yellow-600" : "text-green-500"}`}>{stock?.["% Chg"]}
+                                                    </td>
                                                 </tr>
                                                 {expandedRow === stock.Symbol && (
                                                     <tr>
@@ -152,6 +205,12 @@ const Scanner = () => {
                                                                         </div>
                                                                         <div>
                                                                             <p><strong>Volume:</strong> {stockDetails[stock.Symbol]?.volume.toLocaleString()}</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p><strong>Qty:</strong> {parseInt(amtPerTrade / stock?.Price)}</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p><strong>Invest:</strong> {(parseInt(amtPerTrade / stock?.Price) * stock?.Price).toFixed(2)}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
