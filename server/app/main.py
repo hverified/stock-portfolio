@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, bank, portfolio, market, scrape_table, scanner
 from app.core.config import settings
+import requests
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -38,3 +39,13 @@ app.include_router(scanner.router, prefix="/scanner", tags=["Chartlink Scanner"]
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Stock Portfolio App"}
+
+
+@app.on_event("startup")
+async def get_ip():
+    try:
+        response = requests.get("https://api64.ipify.org?format=json")
+        external_ip = response.json().get("ip")
+        print(f"External IP of this instance: {external_ip}")
+    except Exception as e:
+        print(f"Error fetching external IP: {e}")
