@@ -3,35 +3,49 @@ import axios from "axios";
 import Header from "../components/Header";
 
 const Scanner = () => {
-    const [scanners, setScanners] = useState(["BTST Scanner"]);
+    const [scanners, setScanners] = useState([]);
     const [selectedScanner, setSelectedScanner] = useState(null);
     const [scannedStocks, setScannedStocks] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [expandedRow, setExpandedRow] = useState(null);
     const [stockDetails, setStockDetails] = useState({});
-    const [lastUpdatedAt, setLastUpdatedAt] = useState("");
+    const [expandedRow, setExpandedRow] = useState(null);
     const [amtPerTrade, setAmtPerTrade] = useState(10000);
+    const [showAddScannerModal, setShowAddScannerModal] = useState(false);
+    const [newScanner, setNewScanner] = useState({ name: "", description: "", url: "", table_id: "" });
+    const [showToolbar, setShowToolbar] = useState(null);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
+    const [lastUpdatedAt, setLastUpdatedAt] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`
+
+    const fetchScanners = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}/scanner/get_scanners`);
+            setScanners(response.data);
+            console.log("Scanners fetched:", response.data);
+        } catch (error) {
+            console.error("Error fetching scanners:", error);
+        }
+    };
 
     useEffect(() => {
-        const savedLastUpdatedAt = localStorage.getItem("lastUpdatedAt");
-        if (savedLastUpdatedAt) {
-            setLastUpdatedAt(savedLastUpdatedAt);
-        }
+        fetchScanners();
     }, []);
 
-    const fetchScannedStocks = async () => {
+    const fetchScannedStocks = async (scanner) => {
         setLoading(true);
+        console.log("Fetching scanned stocks for:", scanner);
         try {
             const requestBody = {
-                url: `${import.meta.env.VITE_API_SCRAPE_TABLE_URL}`,
-                table_id: "DataTables_Table_0",
+                url: scanner.url,
+                table_id: scanner.table_id,
             };
 
             const response = await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/scrape/table`,
+                `${baseUrl}/scrape/table`,
                 requestBody
             );
-
+            console.log("Scanned stocks fetched:", response.data.data);
             setScannedStocks(response.data.data);
 
             // Save the last updated time on success
@@ -47,25 +61,64 @@ const Scanner = () => {
                 setLastUpdatedAt(savedLastUpdatedAt);
             }
         } finally {
+            console.log("Scanned stocks fetched for:", scanner);
             setLoading(false);
         }
     };
-
-    const handleCardClick = (scanner) => {
-        setSelectedScanner(scanner);
-        fetchScannedStocks();
-    };
-
-    const handleInputChange = (e) => {
-        const input = e.target.value;
-        setAmtPerTrade(input);
-    };
-
     const closeModal = () => {
         setSelectedScanner(null);
         setScannedStocks([]);
     };
+    const handleCardClick = (scanner) => {
+        setSelectedScanner(scanner);
+        fetchScannedStocks(scanner);
+    };
 
+    const handleAddScanner = async () => {
+        if (!newScanner.name || !newScanner.description || !newScanner.url || !newScanner.table_id) {
+            alert("Please fill all fields to add a scanner.");
+            return;
+        }
+        try {
+            await axios.post(`${baseUrl}/scanner/add_scanner`, newScanner);
+            setNewScanner({ name: "", description: "", url: "", table_id: "" });
+            setShowAddScannerModal(false);
+            fetchScanners();
+        } catch (error) {
+            console.error("Error adding scanner:", error);
+        }
+    };
+
+    const handleDeleteScanner = async (scanner_id) => {
+        try {
+            await axios.delete(`${baseUrl}/scanner/delete_scanner/${scanner_id}`);
+            fetchScanners();
+        } catch (error) {
+            console.error("Error deleting scanner:", error);
+        }
+    };
+
+    const handleUpdateScanner = (scanner) => {
+        // Open the edit modal instead of directly updating the scanner
+        setSelectedScanner(scanner);
+    };
+
+    const toggleToolbar = (scanner_id) => {
+        setShowToolbar((prev) => (prev === scanner_id ? null : scanner_id));
+    };
+
+    const confirmDelete = (scanner_id) => {
+        setShowDeleteConfirm(scanner_id);
+    };
+
+    const cancelDelete = () => {
+        setShowDeleteConfirm(null);
+    };
+
+    const deleteConfirmed = () => {
+        handleDeleteScanner(showDeleteConfirm);
+        setShowDeleteConfirm(null);
+    };
     const handleRowClick = async (symbol) => {
         if (expandedRow === symbol) {
             setExpandedRow(null);
@@ -79,7 +132,7 @@ const Scanner = () => {
 
         try {
             const response = await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/market/stock-detail?index_symbol=${symbol}`
+                `${baseUrl}/market/stock-detail?index_symbol=${symbol}`
             );
             setStockDetails((prevDetails) => ({
                 ...prevDetails,
@@ -91,10 +144,15 @@ const Scanner = () => {
         }
     };
 
+    const handleInputChange = (e) => {
+        const input = e.target.value;
+        setAmtPerTrade(input);
+    };
+
     return (
         <div className="p-4 space-y-6 pb-20">
             <Header />
-            <div className="flex items-center space-x-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <label htmlFor="amountPerTrade">
                     Amt/Trade: ₹
                 </label>
@@ -108,14 +166,38 @@ const Scanner = () => {
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {scanners.map((scanner, index) => (
+                {scanners.map((scanner) => (
                     <div
-                        key={index}
-                        onClick={() => handleCardClick(scanner)}
-                        className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg"
+                        key={scanner.scanner_id}
+                        className="bg-white p-4 rounded-lg shadow-md relative hover:shadow-lg"
+                        style={{ zIndex: showToolbar === scanner.scanner_id ? 10 : "auto" }} // Ensure toolbar stays on top
                     >
-                        <h3 className="text-lg font-semibold text-gray-700">{scanner}</h3>
-                        <p className="text-sm text-gray-500">Click to view scanned stocks</p>
+                        <div onClick={() => handleCardClick(scanner)} className="cursor-pointer">
+                            <h3 className="text-lg font-semibold text-gray-700">{scanner.name}</h3>
+                            <p className="text-sm text-gray-500">{scanner.description}</p>
+                        </div>
+                        <button
+                            onClick={() => toggleToolbar(scanner.scanner_id)}
+                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                        >
+                            &#x22EE;
+                        </button>
+                        {showToolbar === scanner.scanner_id && (
+                            <div className="absolute top-8 right-2 bg-white shadow-lg rounded-md p-2 z-20">
+                                <button
+                                    onClick={() => handleUpdateScanner(scanner)}
+                                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => confirmDelete(scanner.scanner_id)}
+                                    className="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -125,10 +207,10 @@ const Scanner = () => {
                     <div className="bg-white w-11/12 max-w-4xl rounded-lg p-4 shadow-lg h-4/5 flex flex-col">
                         {/* Header */}
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-xl font-semibold">{selectedScanner}</h3>
+                            <h3 className="text-xl font-semibold">{selectedScanner.name}</h3>
                             <div className="flex gap-2">
                                 <button
-                                    onClick={fetchScannedStocks}
+                                    onClick={() => fetchScannedStocks(selectedScanner)}
                                     className="text-blue-500 hover:text-blue-600 border border-gray-300 rounded-md p-2"
                                     title="Refresh"
                                 >
@@ -232,14 +314,87 @@ const Scanner = () => {
                     </div>
                 </div>
             )}
-            <div className="relative">
-                <div className="fixed bottom-16 right-4">
-                    <button
-                        className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
-                    >
-                        + Scanner
-                    </button>
+
+            {showAddScannerModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white w-11/12 max-w-lg rounded-lg p-6 shadow-lg">
+                        <h3 className="text-xl font-semibold mb-4">Add New Scanner</h3>
+                        <div className="space-y-4">
+                            <input
+                                type="text"
+                                placeholder="Scanner Name"
+                                value={newScanner.name}
+                                onChange={(e) => setNewScanner({ ...newScanner, name: e.target.value })}
+                                className="w-full p-3 rounded-lg border border-gray-300"
+                            />
+                            <textarea
+                                placeholder="Description"
+                                value={newScanner.description}
+                                onChange={(e) => setNewScanner({ ...newScanner, description: e.target.value })}
+                                className="w-full p-3 rounded-lg border border-gray-300"
+                            />
+                            <input
+                                type="text"
+                                placeholder="URL"
+                                value={newScanner.url}
+                                onChange={(e) => setNewScanner({ ...newScanner, url: e.target.value })}
+                                className="w-full p-3 rounded-lg border border-gray-300"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Table ID"
+                                value={newScanner.table_id}
+                                onChange={(e) => setNewScanner({ ...newScanner, table_id: e.target.value })}
+                                className="w-full p-3 rounded-lg border border-gray-300"
+                            />
+                        </div>
+                        <div className="flex justify-end mt-4">
+                            <button
+                                onClick={() => setShowAddScannerModal(false)}
+                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-md p-2 mr-2"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleAddScanner}
+                                className="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-2"
+                            >
+                                Add Scanner
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            )}
+
+            {showDeleteConfirm && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white w-11/12 max-w-lg rounded-lg p-6 shadow-lg">
+                        <h3 className="text-xl font-semibold mb-4">Are you sure you want to delete this scanner?</h3>
+                        <div className="flex justify-end mt-4">
+                            <button
+                                onClick={cancelDelete}
+                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-md p-2 mr-2"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={deleteConfirmed}
+                                className="text-white bg-red-500 hover:bg-red-600 rounded-md p-2"
+                            >
+                                Confirm Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className="fixed bottom-16 right-4">
+                <button
+                    onClick={() => setShowAddScannerModal(true)}
+                    className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
+                >
+                    + Scanner
+                </button>
             </div>
         </div>
     );

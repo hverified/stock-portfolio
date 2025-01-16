@@ -13,7 +13,7 @@ DATABASE_NAME = os.getenv("DATABASE_NAME", "stock_portfolio")
 client = MongoClient(MONGO_URI)
 db = client[DATABASE_NAME]
 
-# Collections for the app
 db.users = db["users"]
 db.bank_accounts = db["bank_accounts"]
 db.portfolios = db["portfolios"]
+db.chartlink_scanners = db["chartlink_scanners"]

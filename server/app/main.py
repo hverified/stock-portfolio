@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, bank, portfolio, market, scrape_table
+from app.routes import auth, bank, portfolio, market, scrape_table, scanner
 from app.core.config import settings
 
 app = FastAPI(
@@ -32,6 +32,7 @@ app.include_router(bank.router, prefix="/bank", tags=["Bank Account"])
 app.include_router(portfolio.router, prefix="/portfolio", tags=["Portfolio Management"])
 app.include_router(market.router, prefix="/market", tags=["Market"])
 app.include_router(scrape_table.router, prefix="/scrape", tags=["Scrape Table"])
+app.include_router(scanner.router, prefix="/scanner", tags=["Chartlink Scanner"])
 
 
 @app.get("/")
