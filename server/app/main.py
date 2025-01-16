@@ -53,18 +53,7 @@ async def get_upper_circuit():
     try:
         url = "https://chartink.com/screener/btst-ema-rsi-volume-2"
         table_id = "DataTables_Table_0"
-        # table_data = scrape_table.scrape_table_to_json(url, table_id)
-        table_data = [
-            {
-                "Sr.": "1",
-                "Stock Name": "Aeroflex Industries Ltd",
-                "Symbol": "AEROFLEX",
-                "Links": "P&F | F.A",
-                "% Chg": "20%",
-                "Price": "223.35",
-                "Volume": "1,12,42,110",
-            }
-        ]
+        table_data = scrape_table.scrape_table_to_json(url, table_id)
 
         # Check and handle each stock's % Chg
         for stock in table_data:
