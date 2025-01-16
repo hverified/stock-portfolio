@@ -162,7 +162,7 @@ const Scanner = () => {
                     placeholder="Enter amount per trade"
                     value={amtPerTrade}
                     onChange={handleInputChange}
-                    className="p-3 rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+                    className="p-2 rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -325,39 +325,39 @@ const Scanner = () => {
                                 placeholder="Scanner Name"
                                 value={newScanner.name}
                                 onChange={(e) => setNewScanner({ ...newScanner, name: e.target.value })}
-                                className="w-full p-3 rounded-lg border border-gray-300"
+                                className="w-full p-3 rounded-lg bg-white border border-gray-300"
                             />
                             <textarea
                                 placeholder="Description"
                                 value={newScanner.description}
                                 onChange={(e) => setNewScanner({ ...newScanner, description: e.target.value })}
-                                className="w-full p-3 rounded-lg border border-gray-300"
+                                className="w-full p-3 rounded-lg bg-white border border-gray-300"
                             />
                             <input
                                 type="text"
                                 placeholder="URL"
                                 value={newScanner.url}
                                 onChange={(e) => setNewScanner({ ...newScanner, url: e.target.value })}
-                                className="w-full p-3 rounded-lg border border-gray-300"
+                                className="w-full p-3 rounded-lg bg-white border border-gray-300"
                             />
                             <input
                                 type="text"
                                 placeholder="Table ID"
                                 value={newScanner.table_id}
                                 onChange={(e) => setNewScanner({ ...newScanner, table_id: e.target.value })}
-                                className="w-full p-3 rounded-lg border border-gray-300"
+                                className="w-full p-3 rounded-lg bg-white border border-gray-300"
                             />
                         </div>
                         <div className="flex justify-end mt-4">
                             <button
                                 onClick={() => setShowAddScannerModal(false)}
-                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-md p-2 mr-2"
+                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-full px-4 py-2 shadow-md mr-2"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleAddScanner}
-                                className="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-2"
+                                className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
                             >
                                 Add Scanner
                             </button>
