@@ -9,6 +9,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
+import pytz
 
 load_dotenv()
 
@@ -110,10 +111,16 @@ def send_email(stock):
     sender_email = os.getenv("SENDER_EMAIL")
     receiver_email = os.getenv("RECEIVER_EMAIL")
     password = os.getenv("EMAIL_PASSWORD")
-    current_datetime = datetime.now().strftime("%d-%b %I:%M %p")
 
+    # Get the current time in UTC
+    utc_now = datetime.now(pytz.utc)
+
+    # Format the datetime in the desired format
+    formatted_time = utc_now.astimezone(pytz.timezone("Asia/Kolkata")).strftime(
+        "%d-%b %I:%M%p"
+    )
     # Email content
-    subject = f"🚨 Stock Alert at {current_datetime}: {stock['Symbol']} 🚨"
+    subject = f"🚨 Stock Alert at {formatted_time}: {stock['Symbol']} 🚨"
     body = f"""
     <!DOCTYPE html>
     <html>
