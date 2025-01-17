@@ -78,7 +78,7 @@ def should_send_email(symbol, percent_change):
 
     if previous_percent is None or percent_change >= previous_percent + 1:
         return True
-    return True
+    return False
 
 
 def update_percent_data(symbol, percent_change):
