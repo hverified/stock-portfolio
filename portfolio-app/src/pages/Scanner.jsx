@@ -256,8 +256,8 @@ const Scanner = () => {
                                                     <td className="border-b py-2 text-xs px-4">{stock?.Symbol}</td>
                                                     <td className="border-b py-2 text-xs px-4">₹{stock?.Price}</td>
                                                     <td className={`border-b py-2 text-xs px-4 
-                                                        ${stock?.["% Chg"].includes("-") ? "text-red-500" :
-                                                            parseFloat(stock?.["% Chg"].replace("%", "")) >= 7 || parseFloat(stock?.["% Chg"].replace("%", "")) <= 1 ?
+                                                        ${stock?.["% Chg"]?.includes("-") ? "text-red-500" :
+                                                            parseFloat(stock?.["% Chg"]?.replace("%", "")) >= 7 || parseFloat(stock?.["% Chg"].replace("%", "")) <= 1 ?
                                                                 "text-yellow-600" : "text-green-500"}`}>{stock?.["% Chg"]}
                                                     </td>
                                                 </tr>
