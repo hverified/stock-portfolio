@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
-import os
 
 router = APIRouter()
 
@@ -21,18 +20,10 @@ def scrape_table_to_json(url: str, table_id: str):
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.binary_location = "/usr/bin/chromium"
+    # chrome_options.binary_location = "/usr/bin/chromium"
 
-    # Dynamically set the binary path
-    # CHROME_BINARY_LOCATIONS = ["/usr/bin/chromium", "/usr/bin/chromedriver"]
-    # chrome_binary = next(
-    #     (path for path in CHROME_BINARY_LOCATIONS if os.path.exists(path)), None
-    # )
-
-    # if not chrome_binary:
-    #     raise Exception("Chromium binary not found in the expected locations.")
-
-    service = Service("/usr/bin/chromedriver")
+    # service = Service("/usr/bin/chromedriver")
+    service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     try:
