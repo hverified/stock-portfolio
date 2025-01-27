@@ -22,13 +22,13 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
+    gnupg2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Google Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb && \
-    apt-get -f install -y && \
-    rm google-chrome-stable_current_amd64.deb
+# Add Google's official repository for Chrome
+RUN echo "deb [signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list.d/google-chrome.list
+RUN curl -fsSL https://packages.google.com/keys/google.asc | tee /usr/share/keyrings/google-archive-keyring.gpg
+RUN apt-get update && apt-get install -y google-chrome-stable
 
 # Set working directory
 WORKDIR /app
