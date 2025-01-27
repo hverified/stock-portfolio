@@ -1,5 +1,5 @@
-# Use Python 3.10 as the base image
-FROM python:3.10-slim
+# Use Python 3.9 as the base image
+FROM python:3.9-slim
 
 # Install dependencies for headless chrome
 RUN apt-get update && apt-get install -y \
@@ -25,12 +25,11 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Add Google's official repository for Chrome
-RUN curl -fsSL https://packages.google.com/keys/google.asc | tee /usr/share/keyrings/google-archive-keyring.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list.d/google-chrome.list
-
-# Update and install Google Chrome
-RUN apt-get update && apt-get install -y google-chrome-stable
+# Download and install Google Chrome manually
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get update && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
 
 # Set working directory
 WORKDIR /app
