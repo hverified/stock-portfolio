@@ -26,8 +26,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Add Google's official repository for Chrome
-RUN echo "deb [signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list.d/google-chrome.list
 RUN curl -fsSL https://packages.google.com/keys/google.asc | tee /usr/share/keyrings/google-archive-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list.d/google-chrome.list
+
+# Update and install Google Chrome
 RUN apt-get update && apt-get install -y google-chrome-stable
 
 # Set working directory
