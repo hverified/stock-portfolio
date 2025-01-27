@@ -1,0 +1,25 @@
+[
+    {
+        "id": "90d8106cb2164",
+        "stock_name": "Jindal Worldwide Limited",
+        "symbol": "JINDWORLD",
+        "change": 6.38,
+        "price": "413.8",
+        "volume": "24,41,386",
+        "security_id": 20642,
+        "status": "sold",
+        "date": "2025-01-25"
+    },
+    {
+        "id": "c00e0ef9",
+        "stock_name": "Unimech Aerospace and Manufacturing Ltd",
+        "symbol": "UNIMECH",
+        "change": 3.02,
+        "price": "1216.2",
+        "quantity": 0,
+        "volume": "6,77,140",
+        "security_id": 28960,
+        "status": "bought",
+        "date": "2025-01-27"
+    }
+]

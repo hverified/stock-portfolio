@@ -11,6 +11,8 @@ class Settings:
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     CLIENT_URL: str = os.getenv("CLIENT_URL")
     DOCS_URL: str = os.getenv("DOCS_URL")
+    DHAN_CLIENT_ID: str = os.getenv("DHAN_CLIENT_ID")
+    DHAN_ACCESS_TOKEN: str = os.getenv("DHAN_ACCESS_TOKEN")
 
 
 settings = Settings()
