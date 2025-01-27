@@ -71,7 +71,7 @@ Pygments==2.19.1
 pymongo==4.9.2
 pyOpenSSL==25.0.0
 pyparsing==3.2.0
-pyppeteer==2.0.0
+# pyppeteer==2.0.0
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
