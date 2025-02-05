@@ -16,7 +16,7 @@ async def schedule_async_task(task_func, *args):
 
 def setup_scheduled_tasks(scheduler):
     fetch_stock_trigger = CronTrigger(
-        second=30, minute=42, hour=19, day="*", month="*", day_of_week="0-4"
+        second=30, minute=39, hour=20, day="*", month="*", day_of_week="0-4"
     )
     buy_trigger = CronTrigger(
         second=00, minute=43, hour=11, day="*", month="*", day_of_week="0-4"
@@ -26,5 +26,5 @@ def setup_scheduled_tasks(scheduler):
     )
 
     scheduler.add_job(schedule_async_task, fetch_stock_trigger, args=[fetch_stock_data])
-    scheduler.add_job(schedule_async_task, buy_trigger, args=[execute_trade, "buy"])
-    scheduler.add_job(schedule_async_task, sell_trigger, args=[execute_trade, "sell"])
+    # scheduler.add_job(schedule_async_task, buy_trigger, args=[execute_trade, "buy"])
+    # scheduler.add_job(schedule_async_task, sell_trigger, args=[execute_trade, "sell"])
