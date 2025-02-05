@@ -36,8 +36,7 @@ async def execute_trade(action):
                 return
 
             current_price = float(get_current_price(stock["symbol"]))
-            balance = float(fund_details["data"]["availabelBalance"]) - 200
-            balance = 5000
+            balance = float(fund_details["data"]["availabelBalance"]) - 500
             quantity = int(balance / current_price)
 
             request_payload = {
@@ -67,6 +66,7 @@ async def execute_trade(action):
                 "product_type": dhan_client.CNC,
                 "price": 0,
             }
+            print(request_payload)
         else:
             logging.error(f"Invalid action: {action}")
             return
