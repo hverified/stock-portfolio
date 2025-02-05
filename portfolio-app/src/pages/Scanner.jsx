@@ -16,7 +16,7 @@ const Scanner = () => {
     const [lastUpdatedAt, setLastUpdatedAt] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
 
     const fetchScanners = async () => {
         try {
@@ -65,10 +65,12 @@ const Scanner = () => {
             setLoading(false);
         }
     };
+
     const closeModal = () => {
         setSelectedScanner(null);
         setScannedStocks([]);
     };
+
     const handleCardClick = (scanner) => {
         setSelectedScanner(scanner);
         fetchScannedStocks(scanner);
@@ -99,7 +101,6 @@ const Scanner = () => {
     };
 
     const handleUpdateScanner = (scanner) => {
-        // Open the edit modal instead of directly updating the scanner
         setSelectedScanner(scanner);
     };
 
@@ -119,6 +120,7 @@ const Scanner = () => {
         handleDeleteScanner(showDeleteConfirm);
         setShowDeleteConfirm(null);
     };
+
     const handleRowClick = async (symbol) => {
         if (expandedRow === symbol) {
             setExpandedRow(null);
@@ -170,7 +172,7 @@ const Scanner = () => {
                     <div
                         key={scanner.scanner_id}
                         className="bg-white p-4 rounded-lg shadow-md relative hover:shadow-lg"
-                        style={{ zIndex: showToolbar === scanner.scanner_id ? 10 : "auto" }} // Ensure toolbar stays on top
+                        style={{ zIndex: showToolbar === scanner.scanner_id ? 10 : "auto" }}
                     >
                         <div onClick={() => handleCardClick(scanner)} className="cursor-pointer">
                             <h3 className="text-lg font-semibold text-gray-700">{scanner.name}</h3>
@@ -247,66 +249,77 @@ const Scanner = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {scannedStocks.map((stock, index) => (
-                                            <React.Fragment key={index}>
-                                                <tr
-                                                    onClick={() => handleRowClick(stock.Symbol)}
-                                                    className="cursor-pointer hover:bg-gray-100"
-                                                >
-                                                    <td className="border-b py-2 text-xs px-4">{stock?.Symbol}</td>
-                                                    <td className="border-b py-2 text-xs px-4">₹{stock?.Price}</td>
-                                                    <td className={`border-b py-2 text-xs px-4 
-                                                        ${stock?.["% Chg"]?.includes("-") ? "text-red-500" :
-                                                            parseFloat(stock?.["% Chg"]?.replace("%", "")) >= 7 || parseFloat(stock?.["% Chg"].replace("%", "")) <= 1 ?
-                                                                "text-yellow-600" : "text-green-500"}`}>{stock?.["% Chg"]}
-                                                    </td>
-                                                </tr>
-                                                {expandedRow === stock.Symbol && (
-                                                    <tr>
-                                                        <td colSpan={3} className="border-b py-2 px-2 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 rounded-lg">
-                                                            {stockDetails[stock.Symbol] ? (
-                                                                <div className="p-2 rounded-lg shadow-lg">
-                                                                    <div className="flex items-center justify-between mb-4">
-                                                                        <p className="text-sm font-bold text-gray-700">
-                                                                            <span
-                                                                                className={`px-2 py-1 text-xs font-semibold rounded-full ${stockDetails[stock.Symbol]?.category === "Large-Cap"
-                                                                                    ? "bg-blue-100 text-blue-600"
-                                                                                    : stockDetails[stock.Symbol]?.category === "Mid-Cap"
-                                                                                        ? "bg-yellow-100 text-yellow-600"
-                                                                                        : "bg-green-100 text-green-600"
-                                                                                    }`}
-                                                                            >
-                                                                                {stockDetails[stock.Symbol]?.category.charAt(0)}
-                                                                            </span>
-                                                                            {` ${stockDetails[stock.Symbol]?.stock_name}`}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div className="grid grid-cols-2 gap-4 text-xs">
-                                                                        <div>
-                                                                            <p><strong>M.Cap:</strong> ₹{stockDetails[stock.Symbol]?.market_cap_crores.toLocaleString()} Cr.</p>
-                                                                        </div>
-                                                                        <div>
-                                                                            <p><strong>Volume:</strong> {stockDetails[stock.Symbol]?.volume.toLocaleString()}</p>
-                                                                        </div>
-                                                                        <div>
-                                                                            <p><strong>Qty:</strong> {parseInt(amtPerTrade / stock?.Price)}</p>
-                                                                        </div>
-                                                                        <div>
-                                                                            <p><strong>Invest:</strong> {(parseInt(amtPerTrade / stock?.Price) * stock?.Price).toFixed(2)}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            ) : (
-                                                                <div className="p-4 flex items-center justify-center">
-                                                                    <div className="loader border-t-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
-                                                                    <p className="ml-4 text-xs text-gray-500">Loading details...</p>
-                                                                </div>
-                                                            )}
+                                        {scannedStocks.length === 0 ? (
+                                            <tr>
+                                                <td colSpan={3} className="p-4 text-center text-gray-500">
+                                                    <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+                                                        <h2 className="text-xl font-semibold text-gray-700">No Stocks Filtered</h2>
+                                                        <p className="mt-2 text-gray-600">Try adjusting the filters or check back later.</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            scannedStocks.map((stock, index) => (
+                                                <React.Fragment key={index}>
+                                                    <tr
+                                                        onClick={() => handleRowClick(stock.Symbol)}
+                                                        className="cursor-pointer hover:bg-gray-100"
+                                                    >
+                                                        <td className="border-b py-2 text-xs px-4">{stock?.Symbol}</td>
+                                                        <td className="border-b py-2 text-xs px-4">₹{stock?.Price}</td>
+                                                        <td className={`border-b py-2 text-xs px-4 
+                                                            ${stock?.["% Chg"]?.includes("-") ? "text-red-500" :
+                                                                parseFloat(stock?.["% Chg"]?.replace("%", "")) >= 7 || parseFloat(stock?.["% Chg"]?.replace("%", "")) <= 1 ?
+                                                                    "text-yellow-600" : "text-green-500"}`}>{stock?.["% Chg"]}
                                                         </td>
                                                     </tr>
-                                                )}
-                                            </React.Fragment>
-                                        ))}
+                                                    {expandedRow === stock.Symbol && (
+                                                        <tr>
+                                                            <td colSpan={3} className="border-b py-2 px-2 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 rounded-lg">
+                                                                {stockDetails[stock.Symbol] ? (
+                                                                    <div className="p-2 rounded-lg shadow-lg">
+                                                                        <div className="flex items-center justify-between mb-4">
+                                                                            <p className="text-sm font-bold text-gray-700">
+                                                                                <span
+                                                                                    className={`px-2 py-1 text-xs font-semibold rounded-full ${stockDetails[stock.Symbol]?.category === "Large-Cap"
+                                                                                        ? "bg-blue-100 text-blue-600"
+                                                                                        : stockDetails[stock.Symbol]?.category === "Mid-Cap"
+                                                                                            ? "bg-yellow-100 text-yellow-600"
+                                                                                            : "bg-green-100 text-green-600"
+                                                                                        }`}
+                                                                                >
+                                                                                    {stockDetails[stock.Symbol]?.category.charAt(0)}
+                                                                                </span>
+                                                                                {` ${stockDetails[stock.Symbol]?.stock_name}`}
+                                                                            </p>
+                                                                        </div>
+                                                                        <div className="grid grid-cols-2 gap-4 text-xs">
+                                                                            <div>
+                                                                                <p><strong>M.Cap:</strong> ₹{stockDetails[stock.Symbol]?.market_cap_crores.toLocaleString()} Cr.</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p><strong>Volume:</strong> {stockDetails[stock.Symbol]?.volume.toLocaleString()}</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p><strong>Qty:</strong> {parseInt(amtPerTrade / stock?.Price)}</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p><strong>Invest:</strong> {(parseInt(amtPerTrade / stock?.Price) * stock?.Price).toFixed(2)}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="p-4 flex items-center justify-center">
+                                                                        <div className="loader border-t-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
+                                                                        <p className="ml-4 text-xs text-gray-500">Loading details...</p>
+                                                                    </div>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                </React.Fragment>
+                                            ))
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -348,54 +361,23 @@ const Scanner = () => {
                                 className="w-full p-3 rounded-lg bg-white border border-gray-300"
                             />
                         </div>
-                        <div className="flex justify-end mt-4">
-                            <button
-                                onClick={() => setShowAddScannerModal(false)}
-                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-full px-4 py-2 shadow-md mr-2"
-                            >
-                                Cancel
-                            </button>
+                        <div className="flex gap-4 mt-4">
                             <button
                                 onClick={handleAddScanner}
-                                className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg w-full"
                             >
                                 Add Scanner
                             </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {showDeleteConfirm && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white w-11/12 max-w-lg rounded-lg p-6 shadow-lg">
-                        <h3 className="text-xl font-semibold mb-4">Are you sure you want to delete this scanner?</h3>
-                        <div className="flex justify-end mt-4">
                             <button
-                                onClick={cancelDelete}
-                                className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded-md p-2 mr-2"
+                                onClick={() => setShowAddScannerModal(false)}
+                                className="bg-gray-500 text-white py-2 px-4 rounded-lg w-full"
                             >
                                 Cancel
                             </button>
-                            <button
-                                onClick={deleteConfirmed}
-                                className="text-white bg-red-500 hover:bg-red-600 rounded-md p-2"
-                            >
-                                Confirm Delete
-                            </button>
                         </div>
                     </div>
                 </div>
             )}
-
-            <div className="fixed bottom-16 right-4">
-                <button
-                    onClick={() => setShowAddScannerModal(true)}
-                    className="px-4 py-2 rounded-full font-semibold transition duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg"
-                >
-                    + Scanner
-                </button>
-            </div>
         </div>
     );
 };

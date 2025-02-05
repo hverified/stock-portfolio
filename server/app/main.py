@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.core.config import settings
 from app.core.scheduler import scheduler, setup_scheduled_tasks
-from app.routes import auth, bank, portfolio, market, scrape_table, scanner
+from app.routes import auth, bank, portfolio, market, scrape_table, scanner, screener, app_logs
 import logging
 
 # Load environment variables
@@ -16,6 +16,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s",
     level=logging.INFO,
 )
+logging.getLogger("urllib3.connectionpool").setLevel(logging.ERROR)
+logging.getLogger("logger.py").setLevel(logging.ERROR)
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -48,7 +50,9 @@ app.include_router(bank.router, prefix="/bank", tags=["Bank Account"])
 app.include_router(portfolio.router, prefix="/portfolio", tags=["Portfolio Management"])
 app.include_router(market.router, prefix="/market", tags=["Market"])
 app.include_router(scrape_table.router, prefix="/scrape", tags=["Scrape Table"])
-app.include_router(scanner.router, prefix="/scanner", tags=["Chartlink Scanner"])
+app.include_router(scanner.router, prefix="/scanner", tags=["Chartink Scanner"])
+app.include_router(screener.router, prefix="/screener", tags=["Charlink Screener"])
+app.include_router(app_logs.router, prefix="/app_logs", tags=["App Logs"])
 
 # Setup scheduled tasks
 setup_scheduled_tasks(scheduler)

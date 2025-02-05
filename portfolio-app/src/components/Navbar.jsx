@@ -38,6 +38,17 @@ const Navbar = () => {
                 <p className="text-xs">Orders</p>
             </NavLink>
             <NavLink
+                to="/logs"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-primary font-semibold transform scale-110 transition-all duration-300"
+                        : "text-gray-500 hover:text-primary hover:scale-105 transform transition-all duration-300"
+                }
+            >
+                <i className="fa-solid fa-book text-2xl mb-1"></i>
+                <p className="text-xs">Logs</p>
+            </NavLink>
+            <NavLink
                 to="/profile"
                 className={({ isActive }) =>
                     isActive

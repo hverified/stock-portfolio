@@ -1,0 +1,261 @@
+2025-02-04 11:25:19,736 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:25:19,737 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:25:22,461 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:25:22,461 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:25:22,461 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:25:22,463 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:25:22,464 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:25:22,464 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:25:22,464 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:25:22,464 - INFO - base.py - start - Scheduler started
+2025-02-04 11:25:30,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='25', second='30'], next run at: 2025-02-05 11:25:30 IST)" (scheduled at 2025-02-04 11:25:30+05:30)
+2025-02-04 11:25:30,002 - INFO - scrape_service.py - fetch_stock_data - Fetching stock data at: 2025-02-04 11:25:30.002197
+2025-02-04 11:25:30,002 - INFO - logger.py - log - ====== WebDriver manager ======
+2025-02-04 11:25:30,134 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 11:25:30,525 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 11:25:30,853 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 11:25:31,889 - INFO - logger.py - log - WebDriver version 132.0.6834.159 selected
+2025-02-04 11:25:31,895 - INFO - logger.py - log - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.159/linux64/chromedriver-linux64.zip
+2025-02-04 11:25:31,895 - INFO - logger.py - log - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.159/linux64/chromedriver-linux64.zip
+2025-02-04 11:25:32,116 - INFO - logger.py - log - Driver downloading response is 200
+2025-02-04 11:25:34,903 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 11:25:35,247 - INFO - logger.py - log - Driver has been saved in cache [/home/cs30/.wdm/drivers/chromedriver/linux64/132.0.6834.159]
+2025-02-04 11:25:38,844 - INFO - scrape_service.py - fetch_stock_data - Stock data fetched at: 2025-02-04 11:25:38.844126
+2025-02-04 11:25:38,860 - INFO - scrape_service.py - fetch_stock_data - Data updated in stock_screener.json successfully!
+2025-02-04 11:25:38,861 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='25', second='30'], next run at: 2025-02-05 11:25:30 IST)" executed successfully
+2025-02-04 11:26:32,924 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:26:32,924 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:26:36,406 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:26:36,407 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:26:36,407 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:26:36,409 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:26:36,410 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:26:36,411 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:26:36,411 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:26:36,411 - INFO - base.py - start - Scheduler started
+2025-02-04 11:28:28,549 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:28:28,549 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:28:30,793 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:28:30,793 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:28:30,793 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:28:30,795 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:28:30,797 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:28:30,797 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:28:30,797 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:28:30,797 - INFO - base.py - start - Scheduler started
+2025-02-04 11:29:48,033 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:29:48,034 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:29:50,585 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:29:50,586 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:29:50,586 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:29:50,587 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:29:50,588 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:29:50,588 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:29:50,589 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:29:50,589 - INFO - base.py - start - Scheduler started
+2025-02-04 11:30:55,002 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='30', second='55'], next run at: 2025-02-05 11:30:55 IST)" (scheduled at 2025-02-04 11:30:55+05:30)
+2025-02-04 11:30:55,002 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:30:55.002365
+2025-02-04 11:30:55,853 - ERROR - trade_service.py - execute_trade - Not enough balance to place the order.
+2025-02-04 11:30:55,854 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='30', second='55'], next run at: 2025-02-05 11:30:55 IST)" executed successfully
+2025-02-04 11:32:07,171 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:32:07,171 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:32:10,322 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:10,322 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:10,322 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:10,323 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:32:10,324 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:10,324 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:10,324 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:10,324 - INFO - base.py - start - Scheduler started
+2025-02-04 11:32:18,251 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:32:18,251 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:32:20,786 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:20,786 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:20,786 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:20,788 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:32:20,789 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:20,789 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:20,789 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:20,790 - INFO - base.py - start - Scheduler started
+2025-02-04 11:32:23,500 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:32:23,500 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:32:26,295 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:26,296 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:26,296 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:32:26,297 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:32:26,297 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:26,298 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:26,298 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:32:26,298 - INFO - base.py - start - Scheduler started
+2025-02-04 11:32:55,002 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='32', second='55'], next run at: 2025-02-05 11:32:55 IST)" (scheduled at 2025-02-04 11:32:55+05:30)
+2025-02-04 11:32:55,003 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:32:55.003114
+2025-02-04 11:32:55,564 - ERROR - trade_service.py - execute_trade - Not enough balance to place the order.
+2025-02-04 11:32:55,564 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='32', second='55'], next run at: 2025-02-05 11:32:55 IST)" executed successfully
+2025-02-04 11:33:41,600 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:33:41,600 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:33:44,715 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:33:44,715 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:33:44,715 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:33:44,717 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:33:44,718 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:33:44,718 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:33:44,719 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:33:44,719 - INFO - base.py - start - Scheduler started
+2025-02-04 11:33:57,559 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:33:57,560 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:34:00,554 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:00,554 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:00,555 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:00,556 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:34:00,557 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:00,557 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:00,558 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:00,558 - INFO - base.py - start - Scheduler started
+2025-02-04 11:34:02,366 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:34:02,366 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:34:05,024 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:05,024 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:05,025 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:05,026 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:34:05,027 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:05,028 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:05,028 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:05,028 - INFO - base.py - start - Scheduler started
+2025-02-04 11:34:10,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='34', second='10'], next run at: 2025-02-05 11:34:10 IST)" (scheduled at 2025-02-04 11:34:10+05:30)
+2025-02-04 11:34:10,002 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:34:10.002321
+2025-02-04 11:34:10,116 - ERROR - trade_service.py - execute_trade - Failed to buy stock: 'error_message'
+2025-02-04 11:34:10,117 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='34', second='10'], next run at: 2025-02-05 11:34:10 IST)" executed successfully
+2025-02-04 11:34:55,760 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:34:55,761 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:34:58,896 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:58,897 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:58,897 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:34:58,899 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:34:58,901 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:58,902 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:58,903 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:34:58,903 - INFO - base.py - start - Scheduler started
+2025-02-04 11:35:01,615 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:35:01,615 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:35:04,719 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:04,720 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:04,720 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:04,722 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:35:04,723 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:04,723 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:04,724 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:04,724 - INFO - base.py - start - Scheduler started
+2025-02-04 11:35:18,672 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:35:18,672 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:35:21,048 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:21,048 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:21,049 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:35:21,050 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:35:21,052 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:21,052 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:21,053 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:35:21,053 - INFO - base.py - start - Scheduler started
+2025-02-04 11:35:50,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='35', second='50'], next run at: 2025-02-05 11:35:50 IST)" (scheduled at 2025-02-04 11:35:50+05:30)
+2025-02-04 11:35:50,002 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:35:50.002103
+2025-02-04 11:36:16,036 - ERROR - trade_service.py - execute_trade - Client ID or user generated access token is invalid or expired.
+2025-02-04 11:36:16,036 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='35', second='50'], next run at: 2025-02-05 11:35:50 IST)" executed successfully
+2025-02-04 11:39:00,531 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:39:00,531 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:39:05,351 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:05,351 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:05,352 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:05,353 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:39:05,354 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:05,354 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:05,354 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:05,354 - INFO - base.py - start - Scheduler started
+2025-02-04 11:39:15,288 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:39:15,288 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:39:17,371 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:17,371 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:17,371 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:17,372 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:39:17,373 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:17,373 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:17,373 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:17,374 - INFO - base.py - start - Scheduler started
+2025-02-04 11:39:35,934 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:39:35,934 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:39:38,782 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:38,783 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:38,784 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:39:38,789 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:39:38,792 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:38,793 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:38,794 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:39:38,796 - INFO - base.py - start - Scheduler started
+2025-02-04 11:40:00,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='40', second='0'], next run at: 2025-02-05 11:40:00 IST)" (scheduled at 2025-02-04 11:40:00+05:30)
+2025-02-04 11:40:00,002 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:40:00.002106
+2025-02-04 11:40:00,728 - ERROR - trade_service.py - execute_trade - Order placement failed: {'status': 'failure', 'remarks': {'error_code': 'DH-906', 'error_type': 'Order_Error', 'error_message': 'Missing required fields, bad values for parameters etc.'}, 'data': {'errorType': 'Order_Error', 'errorCode': 'DH-906', 'errorMessage': 'Missing required fields, bad values for parameters etc.'}}
+2025-02-04 11:40:00,728 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='40', second='0'], next run at: 2025-02-05 11:40:00 IST)" executed successfully
+2025-02-04 11:41:47,959 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:41:47,960 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:41:50,191 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:41:50,191 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:41:50,191 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:41:50,192 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:41:50,194 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:41:50,194 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:41:50,195 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:41:50,195 - INFO - base.py - start - Scheduler started
+2025-02-04 11:42:15,174 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:42:15,174 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 11:42:17,376 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:42:17,378 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:42:17,379 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 11:42:17,385 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 11:42:17,391 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:42:17,392 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:42:17,394 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 11:42:17,395 - INFO - base.py - start - Scheduler started
+2025-02-04 11:43:00,002 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='43', second='0'], next run at: 2025-02-05 11:43:00 IST)" (scheduled at 2025-02-04 11:43:00+05:30)
+2025-02-04 11:43:00,003 - INFO - trade_service.py - execute_trade - Buying stock at: 2025-02-04 11:43:00.003209
+2025-02-04 11:43:00,529 - INFO - trade_service.py - execute_trade - Order executed and saved: {'orderId': '4125020424109', 'correlationId': '48a4fde1', 'request_payload': {'tag': '48a4fde1', 'security_id': '25643', 'exchange_segment': 'NSE_EQ', 'transaction_type': 'BUY', 'quantity': 5, 'order_type': 'MARKET', 'product_type': 'CNC', 'price': 929.3499755859375}, 'timestamp': '2025-02-04T11:43:00.526745', 'date': '2025-02-04'}
+2025-02-04 11:43:00,530 - INFO - helper_function.py - update_stock_status - Updated stock with ID 48a4fde1 to status 'bought'.
+2025-02-04 11:43:00,530 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='11', minute='43', second='0'], next run at: 2025-02-05 11:43:00 IST)" executed successfully
+2025-02-04 11:46:26,534 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 11:46:26,534 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 13:04:56,382 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:04:56,382 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:04:56,383 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:04:56,384 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 13:04:56,385 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:04:56,386 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:04:56,386 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:04:56,386 - INFO - base.py - start - Scheduler started
+2025-02-04 13:06:37,468 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 13:06:37,469 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 13:08:24,368 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:24,369 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:24,370 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:24,374 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 13:08:24,377 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:24,378 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:24,378 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:24,379 - INFO - base.py - start - Scheduler started
+2025-02-04 13:08:52,481 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 13:08:52,481 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-04 13:08:55,440 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:55,440 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:55,441 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-04 13:08:55,442 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-04 13:08:55,443 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:55,443 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:55,444 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-04 13:08:55,444 - INFO - base.py - start - Scheduler started
+2025-02-04 13:09:30,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='13', minute='9', second='30'], next run at: 2025-02-05 13:09:30 IST)" (scheduled at 2025-02-04 13:09:30+05:30)
+2025-02-04 13:09:30,002 - INFO - scrape_service.py - fetch_stock_data - Fetching stock data at: 2025-02-04 13:09:30.002066
+2025-02-04 13:09:30,002 - INFO - logger.py - log - ====== WebDriver manager ======
+2025-02-04 13:09:30,156 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 13:09:30,293 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-04 13:09:30,371 - INFO - logger.py - log - Driver [/home/cs30/.wdm/drivers/chromedriver/linux64/132.0.6834.159/chromedriver-linux64/chromedriver] found in cache
+2025-02-04 13:09:35,387 - WARNING - scrape_table.py - scrape_table_to_json - No valid stock data available to process.
+2025-02-04 13:09:35,391 - WARNING - scrape_service.py - fetch_stock_data - No valid stock data available to process.
+2025-02-04 13:09:35,391 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='13', minute='9', second='30'], next run at: 2025-02-05 13:09:30 IST)" executed successfully
+2025-02-04 13:10:12,224 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-04 13:10:12,224 - INFO - base.py - shutdown - Scheduler has been shut down

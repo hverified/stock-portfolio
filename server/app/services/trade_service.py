@@ -23,19 +23,20 @@ async def execute_trade(action):
 
         if action == "buy":
             today_date = datetime.now().strftime("%Y-%m-%d")
-            today_stock = get_stock_data(file_name, date=today_date)
+            today_stock = get_stock_data(file_name, date=today_date, status="scanned")
             if not today_stock:
                 logging.warning("No stock data available for today.")
                 return
 
             stock = today_stock[0]
             fund_details = dhan_client.get_fund_limits()
+
             if fund_details["status"] != "success":
-                logging.error("Not enough balance to place the order.")
+                logging.error(fund_details["remarks"]['error_message'])
                 return
 
             current_price = float(get_current_price(stock["symbol"]))
-            # balance = float(fund_details["data"]["availabelBalance"]) - 200
+            balance = float(fund_details["data"]["availabelBalance"]) - 200
             balance = 5000
             quantity = int(balance / current_price)
 

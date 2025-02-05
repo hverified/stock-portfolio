@@ -16,10 +16,10 @@ async def schedule_async_task(task_func, *args):
 
 def setup_scheduled_tasks(scheduler):
     fetch_stock_trigger = CronTrigger(
-        second=0, minute=13, hour=15, day="*", month="*", day_of_week="0-4"
+        second=30, minute=9, hour=13, day="*", month="*", day_of_week="0-4"
     )
     buy_trigger = CronTrigger(
-        second=55, minute=15, hour=15, day="*", month="*", day_of_week="0-4"
+        second=00, minute=43, hour=11, day="*", month="*", day_of_week="0-4"
     )
     sell_trigger = CronTrigger(
         second=55, minute=15, hour=9, day="*", month="*", day_of_week="0-4"

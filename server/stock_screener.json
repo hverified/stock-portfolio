@@ -5,6 +5,7 @@
         "symbol": "JINDWORLD",
         "change": 6.38,
         "price": "413.8",
+        "quantity": 34,
         "volume": "24,41,386",
         "security_id": 20642,
         "status": "sold",
@@ -16,10 +17,22 @@
         "symbol": "UNIMECH",
         "change": 3.02,
         "price": "1216.2",
-        "quantity": 0,
+        "quantity": 25,
         "volume": "6,77,140",
         "security_id": 28960,
-        "status": "bought",
+        "status": "scanned",
         "date": "2025-01-27"
+    },
+    {
+        "id": "48a4fde1",
+        "stock_name": "KRN Heat Exchanger and Refrigeration Ltd",
+        "symbol": "KRN",
+        "change": 1.62,
+        "price": "931.65",
+        "volume": "10,99,999",
+        "security_id": 25643,
+        "quantity": 5,
+        "status": "bought",
+        "date": "2025-02-04"
     }
 ]

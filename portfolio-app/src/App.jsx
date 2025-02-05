@@ -8,6 +8,7 @@ import Scanner from "./pages/Scanner";
 import Login from "./pages/Login";  // Import Login page
 import { useAuth } from "./context/AuthContext"; // Import useAuth hook
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import LogViewer from "./pages/LogViewer";
 
 const App = () => {
   const { isAuthenticated } = useAuth(); // Get authentication status
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
           <Route path="/orders" element={isAuthenticated ? <Orders /> : <Login />} />
           <Route path="/scanner" element={isAuthenticated ? <Scanner /> : <Login />} />
+          <Route path="/logs" element={isAuthenticated ? <LogViewer /> : <Login />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login />} />
           <Route path="/login" element={<Login />} />
         </Routes>

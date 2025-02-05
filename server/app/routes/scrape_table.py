@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
+import logging
 
 router = APIRouter()
 
@@ -54,6 +55,12 @@ def scrape_table_to_json(url: str, table_id: str):
                 row_data[headers[i]] = cell.text.strip()
             table_data.append(row_data)
 
+        if not table_data or (
+            len(table_data) == 1
+            and table_data[0].get("Sr.") == "No stocks filtered in the Scan"
+        ):
+            logging.warning("No valid stock data available to process.")
+            return []
         return table_data
 
     except Exception as e:
