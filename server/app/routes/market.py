@@ -1,7 +1,6 @@
 import yfinance as yf
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from datetime import datetime
 
 router = APIRouter()
 
