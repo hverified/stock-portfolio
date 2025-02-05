@@ -57,10 +57,12 @@ pandas==2.2.3
 parso==0.8.4
 passlib==1.7.4
 peewee==3.17.8
+pexpect==4.9.0
 pillow==11.0.0
 platformdirs==4.3.6
 prompt_toolkit==3.0.50
 psutil==6.1.1
+ptyprocess==0.7.0
 pure_eval==0.2.3
 pyasn1==0.6.1
 pycparser==2.22
@@ -71,14 +73,12 @@ Pygments==2.19.1
 pymongo==4.9.2
 pyOpenSSL==25.0.0
 pyparsing==3.2.0
-# pyppeteer==2.0.0
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python-jose==3.3.0
 python-snappy==0.7.3
 pytz==2024.2
-# pywin32==308
 PyYAML==6.0.2
 pyzmq==26.2.0
 requests==2.32.3
