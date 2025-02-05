@@ -1,2 +1,66 @@
 2025-02-05 20:25:09,917 - INFO - main.py - shutdown_event - Shutting down the scheduler
 2025-02-05 20:25:09,918 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:43:33,797 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:43:33,798 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:43:33,799 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:43:33,799 - INFO - base.py - start - Scheduler started
+2025-02-05 20:44:37,198 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:44:37,198 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:44:38,651 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:44:38,652 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:44:38,653 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:44:38,653 - INFO - base.py - start - Scheduler started
+2025-02-05 20:45:04,531 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:45:04,531 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:45:05,940 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:45:05,941 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:45:05,942 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:45:05,942 - INFO - base.py - start - Scheduler started
+2025-02-05 20:45:39,045 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:45:39,045 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:45:40,556 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:45:40,557 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:45:40,558 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:45:40,558 - INFO - base.py - start - Scheduler started
+2025-02-05 20:47:50,671 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:47:50,671 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:47:52,486 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:47:52,488 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:47:52,489 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:47:52,489 - INFO - base.py - start - Scheduler started
+2025-02-05 20:48:31,321 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:48:31,321 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:48:34,362 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:48:34,365 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:48:34,368 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:48:34,368 - INFO - base.py - start - Scheduler started
+2025-02-05 20:49:01,458 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:49:01,458 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:49:02,855 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:49:02,857 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:49:02,859 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:49:02,859 - INFO - base.py - start - Scheduler started
+2025-02-05 20:49:24,832 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:49:24,833 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:49:26,327 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:49:26,328 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:49:26,329 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:49:26,329 - INFO - base.py - start - Scheduler started
+2025-02-05 20:50:30,001 - INFO - base.py - run_coroutine_job - Running job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='20', minute='50', second='30'], next run at: 2025-02-06 20:50:30 IST)" (scheduled at 2025-02-05 20:50:30+05:30)
+2025-02-05 20:50:30,002 - INFO - scrape_service.py - fetch_stock_data - Fetching stock data at: 2025-02-05 20:50:30.002179
+2025-02-05 20:50:30,002 - INFO - logger.py - log - ====== WebDriver manager ======
+2025-02-05 20:50:30,171 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-05 20:50:30,417 - INFO - logger.py - log - Get LATEST chromedriver version for google-chrome
+2025-02-05 20:50:30,727 - INFO - logger.py - log - Driver [/home/cs30/.wdm/drivers/chromedriver/linux64/132.0.6834.159/chromedriver-linux64/chromedriver] found in cache
+2025-02-05 20:50:35,620 - INFO - scrape_service.py - fetch_stock_data - Stock data fetched at: 2025-02-05 20:50:35.620275
+2025-02-05 20:50:35,630 - WARNING - scrape_service.py - load_json - File stock_screener.json is empty or corrupted. Resetting file.
+2025-02-05 20:50:35,631 - INFO - scrape_service.py - fetch_stock_data - Data updated in stock_screener.json successfully!
+2025-02-05 20:50:35,631 - INFO - base.py - run_coroutine_job - Job "schedule_async_task (trigger: cron[month='*', day='*', day_of_week='0-4', hour='20', minute='50', second='30'], next run at: 2025-02-06 20:50:30 IST)" executed successfully
+2025-02-05 20:52:30,290 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:52:30,290 - INFO - base.py - shutdown - Scheduler has been shut down
+2025-02-05 20:52:32,168 - INFO - base.py - add_job - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-05 20:52:32,168 - INFO - main.py - startup_event - Starting the scheduler
+2025-02-05 20:52:32,169 - INFO - base.py - _real_add_job - Added job "schedule_async_task" to job store "default"
+2025-02-05 20:52:32,169 - INFO - base.py - start - Scheduler started
+2025-02-05 20:52:32,973 - INFO - main.py - shutdown_event - Shutting down the scheduler
+2025-02-05 20:52:32,974 - INFO - base.py - shutdown - Scheduler has been shut down
