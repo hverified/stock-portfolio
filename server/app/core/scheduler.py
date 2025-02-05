@@ -3,8 +3,13 @@ from apscheduler.triggers.cron import CronTrigger
 from app.services.scrape_service import fetch_stock_data
 from app.services.trade_service import execute_trade
 import logging
+from pytz import timezone
 
-scheduler = AsyncIOScheduler()
+# Define the timezone
+ASIA_KOLKATA = timezone("Asia/Kolkata")
+
+# Initialize the scheduler
+scheduler = AsyncIOScheduler(timezone=ASIA_KOLKATA)
 
 
 async def schedule_async_task(task_func, *args):
@@ -16,15 +21,16 @@ async def schedule_async_task(task_func, *args):
 
 def setup_scheduled_tasks(scheduler):
     fetch_stock_trigger = CronTrigger(
-        second=30, minute=7, hour=21, day="*", month="*", day_of_week="0-4"
+        second=0, minute=20, hour=21, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
     buy_trigger = CronTrigger(
-        second=00, minute=43, hour=11, day="*", month="*", day_of_week="0-4"
+        second=0, minute=43, hour=11, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
     sell_trigger = CronTrigger(
-        second=55, minute=15, hour=9, day="*", month="*", day_of_week="0-4"
+        second=55, minute=15, hour=9, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
 
     scheduler.add_job(schedule_async_task, fetch_stock_trigger, args=[fetch_stock_data])
     # scheduler.add_job(schedule_async_task, buy_trigger, args=[execute_trade, "buy"])
     # scheduler.add_job(schedule_async_task, sell_trigger, args=[execute_trade, "sell"])
+
