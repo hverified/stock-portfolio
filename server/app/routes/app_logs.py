@@ -2,11 +2,15 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import re
 from datetime import datetime
+import pytz
 
 router = APIRouter()
 
 # Define the path to your log file
 log_file_path = "app_logs.txt"
+
+# Set the target timezone to Asia/Kolkata
+kolkata_timezone = pytz.timezone("Asia/Kolkata")
 
 # Function to parse log line into structured data
 def parse_log_line(line: str):
@@ -15,8 +19,12 @@ def parse_log_line(line: str):
     
     match = re.match(log_pattern, line)
     if match:
+        # Parse the timestamp and convert it to Asia/Kolkata timezone
+        utc_time = datetime.strptime(match.group("timestamp"), "%Y-%m-%d %H:%M:%S,%f")
+        local_time = utc_time.replace(tzinfo=pytz.utc).astimezone(kolkata_timezone)
+        
         return {
-            "timestamp": match.group("timestamp"),
+            "timestamp": local_time.strftime("%Y-%m-%d %H:%M:%S,%f"),  # Format the converted time
             "level": match.group("level"),
             "filename": match.group("filename"),
             "function": match.group("function"),
