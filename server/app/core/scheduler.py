@@ -24,7 +24,7 @@ def setup_scheduled_tasks(scheduler):
         second=0, minute=13, hour=15, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
     buy_trigger = CronTrigger(
-        second=55, minute=15, hour=15, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
+        second=5, minute=16, hour=15, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
     sell_trigger = CronTrigger(
         second=5, minute=16, hour=9, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
