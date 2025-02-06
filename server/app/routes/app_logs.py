@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import re
+from datetime import datetime
 
 router = APIRouter()
 
@@ -38,5 +39,12 @@ async def get_logs():
     except FileNotFoundError:
         return JSONResponse(status_code=404, content={"error": "Log file not found."})
     
-    # Return the logs as a JSON response
-    return JSONResponse(content=logs)
+    # Sort logs in descending order of timestamp
+    sorted_logs = sorted(
+        logs,
+        key=lambda x: datetime.strptime(x["timestamp"], "%Y-%m-%d %H:%M:%S,%f"),
+        reverse=True
+    )
+    
+    # Return the sorted logs as a JSON response
+    return JSONResponse(content=sorted_logs)
