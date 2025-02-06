@@ -27,7 +27,7 @@ def setup_scheduled_tasks(scheduler):
         second=55, minute=15, hour=15, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
     sell_trigger = CronTrigger(
-        second=55, minute=15, hour=9, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
+        second=5, minute=16, hour=9, day="*", month="*", day_of_week="0-4", timezone=ASIA_KOLKATA
     )
 
     scheduler.add_job(schedule_async_task, fetch_stock_trigger, args=[fetch_stock_data])
