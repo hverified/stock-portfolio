@@ -14,3 +14,8 @@ async def get_fund_limits():
 async def get_positions():
     dhan = get_dhan_client()
     return JSONResponse(dhan.get_positions())
+
+@router.get("/get_holdings")
+async def get_holdings():
+    dhan = get_dhan_client()
+    return JSONResponse(dhan.get_holdings())

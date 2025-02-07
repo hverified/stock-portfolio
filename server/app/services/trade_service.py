@@ -37,6 +37,8 @@ async def execute_trade(action):
 
             current_price = float(get_current_price(stock["symbol"]))
             balance = float(fund_details["data"]["availabelBalance"]) - 500
+            if balance > 80000:
+                balance /= 2
             quantity = int(balance / current_price)
 
             request_payload = {

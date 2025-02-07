@@ -1,5 +1,17 @@
 [
     {
+        "id": "745dfaa3",
+        "stock_name": "Castrol India Limited",
+        "symbol": "CASTROLIND",
+        "change": 6.62,
+        "price": "206.88",
+        "volume": "3,34,52,551",
+        "security_id": 1250,
+        "quantity": 209,
+        "status": "sold",
+        "date": "2025-02-06"
+    },
+    {
         "id": "34e1376d",
         "stock_name": "Century Plyboards (india) Limited",
         "symbol": "CENTURYPLY",
