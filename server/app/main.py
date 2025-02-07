@@ -6,7 +6,6 @@ from app.core.scheduler import scheduler, setup_scheduled_tasks
 from app.routes import portfolio, market, scrape_table, screener, app_logs
 import logging
 
-# Load environment variables
 load_dotenv()
 
 # Configure logging
