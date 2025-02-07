@@ -1,5 +1,17 @@
 [
     {
+        "id": "000f32fb",
+        "stock_name": "Ujjivan Small Finance Bank Ltd",
+        "symbol": "UJJIVANSFB",
+        "change": 3.52,
+        "price": "40.01",
+        "volume": "2,23,70,589",
+        "security_id": 15228,
+        "quantity": 1161,
+        "status": "bought",
+        "date": "2025-02-07"
+    },
+    {
         "id": "745dfaa3",
         "stock_name": "Castrol India Limited",
         "symbol": "CASTROLIND",

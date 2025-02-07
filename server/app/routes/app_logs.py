@@ -6,25 +6,21 @@ import pytz
 
 router = APIRouter()
 
-# Define the path to your log file
 log_file_path = "app_logs.txt"
 
-# Set the target timezone to Asia/Kolkata
 kolkata_timezone = pytz.timezone("Asia/Kolkata")
 
-# Function to parse log line into structured data
-def parse_log_line(line: str):
-    # Log line regex pattern to capture date, level, filename, function, and message
+def parse_log_line(line: str, exclude=[]):
     log_pattern = r'(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) - (?P<level>\w+) - (?P<filename>\S+) - (?P<function>\S+) - (?P<message>.*)'
     
     match = re.match(log_pattern, line)
     if match:
-        # Parse the timestamp and convert it to Asia/Kolkata timezone
         utc_time = datetime.strptime(match.group("timestamp"), "%Y-%m-%d %H:%M:%S,%f")
         local_time = utc_time.replace(tzinfo=pytz.utc).astimezone(kolkata_timezone)
-        
+        if match.group("filename") in exclude:
+            return None
         return {
-            "timestamp": local_time.strftime("%Y-%m-%d %H:%M:%S,%f"),  # Format the converted time
+            "timestamp": local_time.strftime("%Y-%m-%d %H:%M:%S,%f"),  
             "level": match.group("level"),
             "filename": match.group("filename"),
             "function": match.group("function"),
@@ -41,7 +37,7 @@ async def get_logs():
     try:
         with open(log_file_path, "r") as file:
             for line in file:
-                log_entry = parse_log_line(line)
+                log_entry = parse_log_line(line, ["base.py", "models.py", "logger.py"])
                 if log_entry:
                     logs.append(log_entry)
     except FileNotFoundError:
