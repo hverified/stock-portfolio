@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // Import the auth context
-import { toast, ToastContainer } from "react-toastify"; // Correct import of toast and ToastContainer
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import { useAuth } from "../context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useAuth(); // Get the login function from context
+    const { login } = useAuth();
 
     const handleLogin = () => {
         if (email && password) {
             if (email === "9716" && password === "9716") {
-                login(); // Call the login function to set authenticated
+                login();
             } else {
-                toast.error("Invalid credentials.", { position: "top-center" }); // Show error toast
+                toast.error("Invalid credentials.", { position: "top-center" });
             }
         }
     };
@@ -52,14 +52,7 @@ const Login = () => {
                 >
                     Log In
                 </button>
-                {/* <div className="mt-4 text-center">
-                    <span className="text-sm text-gray-500">Don't have an account? </span>
-                    <a href="/register" className="text-blue-600 font-semibold hover:underline">
-                        Register
-                    </a>
-                </div> */}
             </div>
-            {/* Toast container to display notifications */}
             <ToastContainer />
         </div>
     );

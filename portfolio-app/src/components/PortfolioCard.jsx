@@ -1,55 +1,51 @@
+import React, { useState, useEffect } from "react";
+
 const PortfolioCard = () => {
-    // Sample data for the portfolio
-    const stocks = {
-        dailyPL: {
-            amount: -150.25,
-            percent: -1.23
-        },
-        totalPL: {
-            amount: 1250.75,
-            percent: 12.58
-        },
-        totalValue: 6282.21,
-        totalInvested: 5000.00, // Added total invested
+    const [portfolioData, setPortfolioData] = useState(null);
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
+
+    useEffect(() => {
+        const fetchPortfolioData = async () => {
+            try {
+                const response = await fetch(`${baseUrl}/portfolio/get_fund_limits`);
+                const result = await response.json();
+                if (result.status === "success") {
+                    setPortfolioData(result.data);
+                } else {
+                    console.error("API Error:", result.remarks);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchPortfolioData();
+    }, []);
+
+    const renderField = (label, value) => {
+        return (
+            <div>
+                <p className="text-sm text-gray-500">{label}</p>
+                {(value !== undefined) ? (
+                    <p className="text-md font-semibold">{`₹${value.toLocaleString()}`}</p>
+                ) : (
+                    <div className="bg-gray-200 animate-pulse h-5 w-24 rounded-lg"></div>
+                )}
+            </div>
+        );
     };
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
             <h3 className="text-lg font-semibold text-secondary">My Portfolio</h3>
 
-            {/* Grid layout for 2x2 */}
             <div className="mt-2 grid grid-cols-2 gap-2">
-
-                {/* Current Amount */}
-                <div>
-                    <p className="text-sm text-gray-500">Current</p>
-                    <p className="text-md font-semibold">{`₹${stocks.totalValue.toLocaleString()}`}</p>
-                </div>
-                {/* Total Returns */}
-                <div>
-                    <p className="text-sm text-gray-500">Total Returns</p>
-                    {/* <p className="text-lg font-semibold">{`₹${stocks.totalPL.amount.toLocaleString()}`}</p> */}
-                    <p className={`text-sm font-medium ${stocks.totalPL.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {stocks.totalPL.amount >= 0 ? `+₹${stocks.totalPL.amount.toFixed(2)}` : `-₹${Math.abs(stocks.totalPL.amount).toFixed(2)}`}
-                        {" "}({stocks.totalPL.percent.toFixed(2)}%)
-                    </p>
-                </div>
-                {/* Total Invested */}
-                <div>
-                    <p className="text-sm text-gray-500">Invested</p>
-                    <p className="text-md font-semibold">{`₹${stocks.totalInvested.toLocaleString()}`}</p>
-                </div>
-
-
-
-                {/* 1D Returns */}
-                <div>
-                    <p className="text-sm text-gray-500">1D Returns</p>
-                    <p className={`text-sm font-medium ${stocks.dailyPL.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {stocks.dailyPL.amount >= 0 ? `+₹${stocks.dailyPL.amount.toFixed(2)}` : `-₹${Math.abs(stocks.dailyPL.amount).toFixed(2)}`}
-                        {" "}({stocks.dailyPL.percent.toFixed(2)}%)
-                    </p>
-                </div>
+                {renderField("Total", portfolioData?.availabelBalance ?
+                    portfolioData?.availabelBalance + portfolioData?.utilizedAmount :
+                    portfolioData?.availabelBalance)}
+                {renderField("SOD Limit", portfolioData?.sodLimit)}
+                {renderField("Invested Amount", portfolioData?.utilizedAmount)}
+                {renderField("Balance", portfolioData?.withdrawableBalance)}
             </div>
         </div>
     );

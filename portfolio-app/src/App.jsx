@@ -22,7 +22,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
           <Route path="/orders" element={isAuthenticated ? <Orders /> : <Login />} />
-          <Route path="/scanner" element={isAuthenticated ? <Scanner /> : <Login />} />
           <Route path="/logs" element={isAuthenticated ? <LogViewer /> : <Login />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login />} />
           <Route path="/login" element={<Login />} />
