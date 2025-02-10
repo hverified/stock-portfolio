@@ -52,7 +52,10 @@ async def fetch_stock_data():
             "security_id": security_id,
             "quantity": 0,
             "status": "scanned",
+            "buy_price": 0,
+            "sell_price": 0,
             "date": current_date,
+            "state": "inactive"
         }
 
         # Load existing data

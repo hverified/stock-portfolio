@@ -68,7 +68,6 @@ async def execute_trade(action):
                 "product_type": dhan_client.CNC,
                 "price": 0,
             }
-            print(request_payload)
         else:
             logging.error(f"Invalid action: {action}")
             return
@@ -84,11 +83,13 @@ async def execute_trade(action):
 
             save_executed_order(orders_file, executed_order)
             logging.info(f"Order executed and saved: {executed_order}")
+            order_details = dhan_client.get_order_by_id(response["data"]["orderId"])
 
             update_stock_status(
                 file_name,
                 stock["id"],
                 request_payload["quantity"],
+                order_details["data"][0]["averageTradedPrice"],
                 "bought" if action == "buy" else "sold",
             )
         else:

@@ -41,13 +41,14 @@ def get_stock_data(file_name, date=None, status=None):
     return filtered_data
 
 
-def update_stock_status(file_name, stock_id, quantity, new_status):
+def update_stock_status(file_name, stock_id, quantity, price, new_status):
     """
     Update the status and quantity of a stock entry in the JSON file by its ID.
 
     :param file_name: The JSON file containing stock entries.
     :param stock_id: The ID of the stock to update.
     :param quantity: Updated quantity.
+    :param price: Average traded price.
     :param new_status: The new status to set.
     """
     try:
@@ -59,6 +60,12 @@ def update_stock_status(file_name, stock_id, quantity, new_status):
         updated = False
         for stock in stock_data:
             if stock.get("id") == stock_id:
+                if new_status == "bought":
+                    stock["buy_price"] = price
+                    stock["state"] = "active"
+                elif new_status == "sold":
+                    stock["sell_price"] = price
+                    stock["state"] = "inactive"
                 stock["status"] = new_status
                 stock["quantity"] = quantity
                 updated = True

@@ -21,8 +21,9 @@ const Navbar = () => {
     return (
         <div className="fixed bottom-0 w-full bg-white shadow-lg rounded-t-3xl flex justify-around items-center py-4 h-16 border-t-2 border-gray-200 z-50">
             <NavbarLink to="/" iconClass="fas fa-home" label="Home" />
-            <NavbarLink to="/orders" iconClass="fa-solid fa-book" label="Screener" />
+            <NavbarLink to="/orders" iconClass="fa-solid fa-book" label="Orders" />
             <NavbarLink to="/logs" iconClass="fa-solid fa-list" label="Logs" />
+            <NavbarLink to="/insights" iconClass="fa-solid fa-chart-pie" label="Insights" />
             <NavbarLink to="/profile" iconClass="fas fa-user" label="Profile" />
         </div>
     );

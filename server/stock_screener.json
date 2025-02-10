@@ -8,8 +8,11 @@
         "volume": "2,23,70,589",
         "security_id": 15228,
         "quantity": 1161,
-        "status": "bought",
-        "date": "2025-02-07"
+        "status": "sold",
+        "date": "2025-02-07",
+        "buy_price": 40.55,
+        "sell_price": 39.52,
+        "state": "inactive"
     },
     {
         "id": "745dfaa3",
@@ -21,7 +24,10 @@
         "security_id": 1250,
         "quantity": 209,
         "status": "sold",
-        "date": "2025-02-06"
+        "date": "2025-02-06",
+        "buy_price": 208.86,
+        "sell_price": 213.56,
+        "state": "inactive"
     },
     {
         "id": "34e1376d",
@@ -33,6 +39,24 @@
         "security_id": 13305,
         "quantity": 57,
         "status": "sold",
-        "date": "2025-02-05"
+        "date": "2025-02-05",
+        "buy_price": 871.95,
+        "sell_price": 868.20,
+        "state": "inactive"
+    },
+    {
+        "id": "c1e079c5",
+        "stock_name": "Redington (india) Limited",
+        "symbol": "REDINGTON",
+        "change": 4.38,
+        "price": "240.52",
+        "volume": "3,43,16,102",
+        "security_id": 14255,
+        "quantity": 195,
+        "status": "bought",
+        "date": "2025-02-10",
+        "buy_price": 240.52,
+        "sell_price": 0,
+        "state": "active"
     }
 ]

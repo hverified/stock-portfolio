@@ -2,12 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const Orders = () => {
     const [stockOrders, setStockOrders] = useState([]);
-    const [selectedStock, setSelectedStock] = useState(null);
+    const [netProfitLoss, setNetProfitLoss] = useState(0);
     const baseUrl = `${import.meta.env.VITE_API_BASE_URL}`;
-
-    const handleCardClick = (stock) => {
-        setSelectedStock(stock);
-    };
 
     const fetchStockData = async () => {
         try {
@@ -15,14 +11,28 @@ const Orders = () => {
             const data = await response.json();
             if (Array.isArray(data)) {
                 setStockOrders(data);
+                calculateNetProfitLoss(data);
             } else {
-                console.error("Fetched data is not an array:", data);
                 setStockOrders([]);
+                setNetProfitLoss(0);
             }
         } catch (error) {
             console.error("Error fetching stock data:", error);
             setStockOrders([]);
+            setNetProfitLoss(0);
         }
+    };
+
+    const calculateNetProfitLoss = (data) => {
+        const totalProfitLoss = data.reduce((acc, stock) => {
+            if (stock.sell_price > 0) {
+                const profitLoss =
+                    (stock.sell_price - stock.buy_price) * stock.quantity;
+                return acc + profitLoss;
+            }
+            return acc;
+        }, 0);
+        setNetProfitLoss(totalProfitLoss);
     };
 
     useEffect(() => {
@@ -30,68 +40,84 @@ const Orders = () => {
     }, []);
 
     return (
-        <div className="p-6 bg-gradient-to-b from-blue-50 to-gray-100 min-h-screen pb-32">
-            <h2 className="text-xl text-gray-700 mb-6">Stock Queue</h2>
-            <div className="space-y-4">
+        <div className="p-6 bg-gradient-to-b from-blue-50 to-gray-100 min-h-screen pb-20">
+            <h2 className="text-xl font-semibold text-gray-700 mb-6">Stock Orders</h2>
+
+            {/* Net Profit/Loss Summary Card */}
+            <div className="mb-6">
+                <div className="p-4 rounded-lg shadow-md bg-white border-l-4 border-blue-500 flex justify-between items-center">
+                    <h3 className="text-lg text-gray-700">Net Profit/Loss:</h3>
+                    <p
+                        className={`text-lg font-semibold ${netProfitLoss >= 0 ? "text-green-600" : "text-red-600"}`}
+                    >
+                        ₹{netProfitLoss.toFixed(2)}
+                    </p>
+                </div>
+            </div>
+
+            {/* Stock Cards */}
+            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {stockOrders.length > 0 ? (
                     stockOrders.map((stock, index) => (
                         <div
                             key={index}
-                            className={`bg-gradient-to-r ${stock.status === "bought"
-                                ? "from-green-50 to-green-100"
+                            className={`p-3 rounded-xl shadow-md transition-transform transform hover:scale-105 bg-white border-l-4 ${stock.status === "bought"
+                                ? "border-yellow-500"
                                 : stock.status === "sold"
-                                    ? "from-red-50 to-red-100"
-                                    : "from-yellow-50 to-yellow-100"
-                                } rounded-xl shadow-md p-4 hover:shadow-lg cursor-pointer transition-transform transform hover:scale-105`}
-                            onClick={() => handleCardClick(stock)}
+                                    ? "border-gray-300"
+                                    : "border-yellow-500"
+                                }`}
                         >
-                            <div className="flex justify-between items-center mb-3">
-                                <div className="flex items-center">
-                                    <p className="text-lg font-semibold text-gray-800">{stock.symbol}</p>
-                                    <span
-                                        className={`ml-3 text-sm font-bold px-3 py-1 rounded-full ${stock.status === "bought"
-                                            ? "bg-green-100 text-green-700"
-                                            : stock.status === "sold"
-                                                ? "bg-red-100 text-red-700"
-                                                : "bg-yellow-100 text-yellow-700"
-                                            }`}
-                                    >
-                                        {stock.status.charAt(0).toUpperCase() + stock.status.slice(1)}
-                                    </span>
-                                </div>
-                                <p className="text-xs text-gray-500">{stock.date}</p>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
-                                <div>
-                                    <p>
-                                        <span className="font-medium">Quantity:</span> {stock.quantity}
-                                    </p>
-                                    <p>
-                                        <span className="font-medium">Bought At:</span> ₹{stock.bought_at}
-                                    </p>
-                                </div>
-                                <div className="text-right">
-                                    <p>
-                                        <span className="font-medium">LTP:</span>{" "}
-                                        <span className="text-lg font-bold">₹{stock.price}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="text-right mt-2">
-                                <button
-                                    className="text-sm font-medium text-blue-600 hover:text-blue-800 underline"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleCardClick(stock);
-                                    }}
+                            <div className="flex justify-between items-center mb-2">
+                                <h3 className="text-sm font-bold text-gray-800">{stock.symbol}</h3>
+                                <span
+                                    className={`text-xs font-semibold px-2 py-1 rounded-full ${stock.status === "bought"
+                                        ? "bg-green-100 text-green-700"
+                                        : stock.status === "sold"
+                                            ? "bg-gray-100 text-gray-700"
+                                            : "bg-yellow-100 text-yellow-700"
+                                        }`}
                                 >
-                                    View More
-                                </button>
+                                    {stock.status.charAt(0).toUpperCase() + stock.status.slice(1)}
+                                </span>
+                            </div>
+                            <p className="text-xs text-gray-500 mb-2">{stock.date}</p>
+                            <div className="text-xs text-gray-600 grid grid-cols-2 gap-2">
+                                <p>
+                                    <span className="font-medium">Quantity:</span> {stock.quantity}
+                                </p>
+                                <p>
+                                    <span className="font-medium">Buy:</span> ₹{stock.buy_price}
+                                </p>
+                                <p>
+                                    <span className="font-medium">Invested:</span> ₹
+                                    {(stock.buy_price * stock.quantity).toFixed(2)}
+                                </p>
+                                {stock.sell_price > 0 && (
+                                    <p>
+                                        <span className="font-medium">Sell:</span> ₹{stock.sell_price}
+                                    </p>
+                                )}
+                                {stock.sell_price > 0 && (
+                                    <p className="col-span-2 font-medium text-right">
+                                        P/L:{" "}
+                                        <span
+                                            className={`${(stock.sell_price - stock.buy_price) * stock.quantity > 0
+                                                ? "text-green-600"
+                                                : "text-red-600"
+                                                } font-bold`}
+                                        >
+                                            ₹{Math.abs(
+                                                (stock.sell_price - stock.buy_price) * stock.quantity
+                                            ).toFixed(2)}
+                                        </span>
+                                    </p>
+                                )}
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p className="text-gray-500 text-center">No stock orders available.</p>
+                    <p className="text-center text-gray-500">No stock orders available.</p>
                 )}
             </div>
         </div>
