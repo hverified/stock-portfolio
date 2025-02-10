@@ -2,7 +2,6 @@ import React from "react";
 import Header from "../components/Header";
 import PortfolioCard from "../components/PortfolioCard";
 import MarketCard from "../components/MarketCard";
-import StockSearchCard from "../components/StockSearchCard";
 
 const Home = () => {
     return (
@@ -10,7 +9,6 @@ const Home = () => {
             <Header />
             <MarketCard />
             <PortfolioCard />
-            <StockSearchCard />
         </div>
     );
 };

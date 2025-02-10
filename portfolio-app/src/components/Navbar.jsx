@@ -19,7 +19,7 @@ const NavbarLink = ({ to, iconClass, label }) => {
 
 const Navbar = () => {
     return (
-        <div className="fixed bottom-0 w-full bg-white shadow-lg rounded-t-3xl flex justify-around items-center py-4 h-16 border-t-2 border-gray-200">
+        <div className="fixed bottom-0 w-full bg-white shadow-lg rounded-t-3xl flex justify-around items-center py-4 h-16 border-t-2 border-gray-200 z-50">
             <NavbarLink to="/" iconClass="fas fa-home" label="Home" />
             <NavbarLink to="/orders" iconClass="fa-solid fa-book" label="Screener" />
             <NavbarLink to="/logs" iconClass="fa-solid fa-list" label="Logs" />
@@ -27,5 +27,6 @@ const Navbar = () => {
         </div>
     );
 };
+
 
 export default Navbar;
