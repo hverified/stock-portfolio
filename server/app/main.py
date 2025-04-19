@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.core.config import settings
+from app.core.database import connect_to_db
 from app.core.scheduler import scheduler, setup_scheduled_tasks
 from app.routes import portfolio, market, scrape_table, screener, app_logs
 import logging
@@ -57,6 +58,7 @@ setup_scheduled_tasks(scheduler)
 @app.on_event("startup")
 async def startup_event():
     logging.info("Starting the scheduler")
+    await connect_to_db()
     scheduler.start()
 
 
