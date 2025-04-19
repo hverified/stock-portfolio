@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from app.core.config import settings
 from app.core.database import connect_to_db
@@ -71,3 +72,9 @@ def shutdown_event():
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Stock Portfolio App"}
+
+
+@app.get("/testdb")
+async def testdb():
+    result = await connect_to_db()
+    return JSONResponse(content=result)
