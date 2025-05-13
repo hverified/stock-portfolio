@@ -48,7 +48,7 @@ const Dashboard = () => {
             netProfitLoss: netProfitLoss.toFixed(2),
             netProfitLossPercentage: ((netProfitLoss / totalInvestment) * 100).toFixed(2),
             totalInvestment: totalInvestment.toFixed(2),
-            totalReturns: (totalProfit + totalLoss).toFixed(2),
+            totalReturns: (totalProfit + totalLoss + totalInvestment).toFixed(2),
         });
 
         setMonthWiseData(
