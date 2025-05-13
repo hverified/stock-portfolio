@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import currencyFormat from "../utils/helperFunction";
 
 const Orders = () => {
     const [stockOrders, setStockOrders] = useState([]);
@@ -50,7 +51,7 @@ const Orders = () => {
                     <p
                         className={`text-lg font-semibold ${netProfitLoss >= 0 ? "text-green-600" : "text-red-600"}`}
                     >
-                        ₹{netProfitLoss.toFixed(2)}
+                        ₹ {currencyFormat(netProfitLoss.toFixed(2))}
                     </p>
                 </div>
             </div>
@@ -87,15 +88,15 @@ const Orders = () => {
                                     <span className="font-medium">Quantity:</span> {stock.quantity}
                                 </p>
                                 <p>
-                                    <span className="font-medium">Buy:</span> ₹{stock.buy_price}
+                                    <span className="font-medium">Buy:</span> ₹{currencyFormat(stock.buy_price.toFixed(2))}
                                 </p>
                                 <p>
                                     <span className="font-medium">Invested:</span> ₹
-                                    {(stock.buy_price * stock.quantity).toFixed(2)}
+                                    {currencyFormat((stock.buy_price * stock.quantity).toFixed(2))}
                                 </p>
                                 {stock.sell_price > 0 && (
                                     <p>
-                                        <span className="font-medium">Sell:</span> ₹{stock.sell_price}
+                                        <span className="font-medium">Sell:</span> ₹{currencyFormat(stock.sell_price.toFixed(2))}
                                     </p>
                                 )}
                                 {stock.sell_price > 0 && (
@@ -107,9 +108,9 @@ const Orders = () => {
                                                 : "text-red-600"
                                                 } font-bold`}
                                         >
-                                            ₹{Math.abs(
+                                            ₹{currencyFormat(Math.abs(
                                                 (stock.sell_price - stock.buy_price) * stock.quantity
-                                            ).toFixed(2)}
+                                            ).toFixed(2))}
                                         </span>
                                     </p>
                                 )}

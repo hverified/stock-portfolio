@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, RadialBarChart, RadialBar } from "recharts";
+import currencyFormat from "../utils/helperFunction";
 
 const Dashboard = () => {
     const [insights, setInsights] = useState({});
@@ -47,7 +48,7 @@ const Dashboard = () => {
             lossPercentage: ((lossCount / totalTrades) * 100).toFixed(2),
             netProfitLoss: netProfitLoss.toFixed(2),
             netProfitLossPercentage: ((netProfitLoss / totalInvestment) * 100).toFixed(2),
-            totalInvestment: totalInvestment.toFixed(2),
+            totalInvestment: (totalInvestment).toFixed(2),
             totalReturns: (totalProfit + totalLoss + totalInvestment).toFixed(2),
         });
 
@@ -70,10 +71,10 @@ const Dashboard = () => {
             {/* Insights */}
             <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {[
-                    { label: "Total Investment", value: `₹${insights.totalInvestment}` },
-                    { label: "Total Returns", value: `₹${insights.totalReturns}`, style: insights.totalReturns >= 0 ? "text-green-600" : "text-red-600" },
-                    { label: "Net Profit/Loss", value: `₹${insights.netProfitLoss}`, style: insights.netProfitLoss >= 0 ? "text-green-600" : "text-red-600" },
-                    { label: "Net Profit/Loss (%)", value: `${insights.netProfitLossPercentage}%`, style: insights.netProfitLossPercentage >= 0 ? "text-green-600" : "text-red-600" },
+                    { label: "Total Investment", value: `₹ ${currencyFormat(insights.totalInvestment)}` },
+                    { label: "Total Returns", value: `₹ ${currencyFormat(insights?.totalReturns)}`, style: insights.totalReturns >= 0 ? "text-green-600" : "text-red-600" },
+                    { label: "Net Profit/Loss", value: `₹ ${currencyFormat(insights?.netProfitLoss)}`, style: insights.netProfitLoss >= 0 ? "text-green-600" : "text-red-600" },
+                    { label: "Net Profit/Loss (%)", value: `${insights?.netProfitLossPercentage}%`, style: insights.netProfitLossPercentage >= 0 ? "text-green-600" : "text-red-600" },
                 ].map(({ label, value, style }, idx) => (
                     <div key={idx} className="p-3 bg-white rounded-xl shadow-md text-center">
                         <p className="text-xs text-gray-600">{label}</p>
@@ -132,7 +133,7 @@ const Dashboard = () => {
                             <tr key={month}>
                                 <td className="px-4 py-2">{month}</td>
                                 <td className={`px-4 py-2 text-right font-bold ${profitLoss >= 0 ? "text-green-600" : "text-red-600"}`}>
-                                    ₹{profitLoss}
+                                    ₹ {currencyFormat(profitLoss)}
                                 </td>
                             </tr>
                         ))}
