@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const Dashboard = () => {
     const [insights, setInsights] = useState({});
@@ -23,23 +24,31 @@ const Dashboard = () => {
             lossCount = 0,
             totalProfit = 0,
             totalLoss = 0,
+            totalInvestment = 0,
             monthWiseMap = {};
 
         data.forEach(({ sell_price, buy_price, quantity, date }) => {
             if (sell_price > 0) {
                 const profitLoss = (sell_price - buy_price) * quantity;
-                const monthKey = new Date(date).toLocaleString("default", { month: "short", year: "numeric" });
+                totalInvestment += buy_price * quantity;
                 profitLoss > 0 ? (profitCount++, (totalProfit += profitLoss)) : (lossCount++, (totalLoss += profitLoss));
+                const monthKey = new Date(date).toLocaleString("default", { month: "short", year: "numeric" });
                 monthWiseMap[monthKey] = (monthWiseMap[monthKey] || 0) + profitLoss;
             }
         });
 
+        const netProfitLoss = totalProfit + totalLoss;
+        const totalTrades = profitCount + lossCount;
+
         setInsights({
             totalProfitCount: profitCount,
             totalLossCount: lossCount,
-            totalProfitAmount: totalProfit.toFixed(2),
-            totalLossAmount: Math.abs(totalLoss).toFixed(2),
-            netProfitLoss: (totalProfit + totalLoss).toFixed(2),
+            winPercentage: ((profitCount / totalTrades) * 100).toFixed(2),
+            lossPercentage: ((lossCount / totalTrades) * 100).toFixed(2),
+            netProfitLoss: netProfitLoss.toFixed(2),
+            netProfitLossPercentage: ((netProfitLoss / totalInvestment) * 100).toFixed(2),
+            totalInvestment: totalInvestment.toFixed(2),
+            totalReturns: (totalProfit + totalLoss).toFixed(2),
         });
 
         setMonthWiseData(
@@ -49,32 +58,58 @@ const Dashboard = () => {
         );
     };
 
+    const pieData = [
+        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "#2b7337" },
+        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "#d92027" },
+    ];
+
     return (
-        <div className="p-4 bg-gray-100 min-h-screen">
+        <div className="p-4 bg-gray-100 min-h-screen pb-20">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">Trade Dashboard</h2>
 
-            <div className="p-4 bg-white rounded-lg shadow-md mb-4">
-                <h3 className="text-lg font-semibold text-gray-700 mb-2">Trading Insights</h3>
-                <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
-                    {[
-                        ["Total Profits (Count)", insights.totalProfitCount, "text-green-600"],
-                        ["Total Losses (Count)", insights.totalLossCount, "text-red-600"],
-                        [
-                            "Net Profit/Loss",
-                            `₹${insights.netProfitLoss}`,
-                            insights.netProfitLoss >= 0 ? "text-green-600" : "text-red-600",
-                        ],
-                    ].map(([label, value, style], idx) => (
-                        <div key={idx}>
-                            <p className="text-sm text-gray-600">{label}</p>
-                            <p className={`text-xl font-bold ${style}`}>{value}</p>
-                        </div>
-                    ))}
-                </div>
+            {/* Insights */}
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {[
+                    { label: "Total Investment", value: `₹${insights.totalInvestment}` },
+                    { label: "Total Returns", value: `₹${insights.totalReturns}`, style: insights.totalReturns >= 0 ? "text-green-600" : "text-red-600" },
+                    // { label: "Winning Trades (%)", value: `${insights.winPercentage}%`, style: "text-green-600" },
+                    // { label: "Losing Trades (%)", value: `${insights.lossPercentage}%`, style: "text-red-600" },
+                    { label: "Net Profit/Loss", value: `₹${insights.netProfitLoss}`, style: insights.netProfitLoss >= 0 ? "text-green-600" : "text-red-600" },
+                    { label: "Net Profit/Loss (%)", value: `${insights.netProfitLossPercentage}%`, style: insights.netProfitLossPercentage >= 0 ? "text-green-600" : "text-red-600" },
+                ].map(({ label, value, style }, idx) => (
+                    <div key={idx} className="p-3 bg-white rounded-xl shadow text-center">
+                        <p className="text-xs text-gray-600">{label}</p>
+                        <p className={`text-lg font-bold ${style}`}>{value}</p>
+                    </div>
+                ))}
             </div>
 
-            <div className="p-4 bg-white rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold text-gray-700 mb-2">Month-Wise Profit/Loss</h3>
+            {/* Pie Chart */}
+            <div className="p-4 bg-white rounded-xl shadow-md mt-6">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">Trade Distribution</h3>
+                <ResponsiveContainer width="100%" height={250}>
+                    <PieChart>
+                        <Pie
+                            data={pieData}
+                            dataKey="value"
+                            nameKey="name"
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                        >
+                            {pieData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+
+            {/* Monthly Stats */}
+            <div className="p-4 bg-white rounded-xl shadow-md mt-6">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">Month-Wise Profit/Loss</h3>
                 <table className="min-w-full text-sm">
                     <thead className="bg-gray-50 text-gray-500">
                         <tr>
