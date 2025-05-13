@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, RadialBarChart, RadialBar } from "recharts";
 
 const Dashboard = () => {
     const [insights, setInsights] = useState({});
@@ -59,8 +59,8 @@ const Dashboard = () => {
     };
 
     const pieData = [
-        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "#41a564" },
-        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "#f4796b" },
+        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "url(#winGradient)" },
+        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "url(#lossGradient)" },
     ];
 
     return (
@@ -72,12 +72,10 @@ const Dashboard = () => {
                 {[
                     { label: "Total Investment", value: `₹${insights.totalInvestment}` },
                     { label: "Total Returns", value: `₹${insights.totalReturns}`, style: insights.totalReturns >= 0 ? "text-green-600" : "text-red-600" },
-                    // { label: "Winning Trades (%)", value: `${insights.winPercentage}%`, style: "text-green-600" },
-                    // { label: "Losing Trades (%)", value: `${insights.lossPercentage}%`, style: "text-red-600" },
                     { label: "Net Profit/Loss", value: `₹${insights.netProfitLoss}`, style: insights.netProfitLoss >= 0 ? "text-green-600" : "text-red-600" },
                     { label: "Net Profit/Loss (%)", value: `${insights.netProfitLossPercentage}%`, style: insights.netProfitLossPercentage >= 0 ? "text-green-600" : "text-red-600" },
                 ].map(({ label, value, style }, idx) => (
-                    <div key={idx} className="p-3 bg-white rounded-xl shadow text-center">
+                    <div key={idx} className="p-3 bg-white rounded-xl shadow-md text-center">
                         <p className="text-xs text-gray-600">{label}</p>
                         <p className={`text-lg font-bold ${style}`}>{value}</p>
                     </div>
@@ -87,16 +85,28 @@ const Dashboard = () => {
             {/* Pie Chart */}
             <div className="p-4 bg-white rounded-xl shadow-md mt-6">
                 <h3 className="text-lg font-semibold text-gray-700 mb-4">Trade Distribution</h3>
-                <ResponsiveContainer width="100%" height={250}>
+                <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
+                        <defs>
+                            <linearGradient id="winGradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stopColor="#41a564" />
+                                <stop offset="100%" stopColor="#a8f0a0" />
+                            </linearGradient>
+                            <linearGradient id="lossGradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stopColor="#f4796b" />
+                                <stop offset="100%" stopColor="#f7b8a8" />
+                            </linearGradient>
+                        </defs>
                         <Pie
                             data={pieData}
                             dataKey="value"
                             nameKey="name"
                             cx="50%"
                             cy="50%"
-                            outerRadius={80}
-                            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                            outerRadius={100}
+                            innerRadius={60}
+                            label={({ name, value }) => `${name}: ${value.toFixed(0)}%`}
+                            paddingAngle={5}
                         >
                             {pieData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.color} />
