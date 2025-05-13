@@ -59,8 +59,8 @@ const Dashboard = () => {
     };
 
     const pieData = [
-        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "url(#winGradient)" },
-        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "url(#lossGradient)" },
+        { name: `Won(${insights.totalProfitCount})`, value: parseFloat(insights.winPercentage || 0), color: "url(#winGradient)" },
+        { name: `Loss(${insights.totalLossCount})`, value: parseFloat(insights.lossPercentage || 0), color: "url(#lossGradient)" },
     ];
 
     return (
@@ -84,7 +84,7 @@ const Dashboard = () => {
 
             {/* Pie Chart */}
             <div className="p-4 bg-white rounded-xl shadow-md mt-6">
-                <h3 className="text-lg font-semibold text-gray-700 mb-4">Trade Distribution</h3>
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">Trade Accuracy</h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                         <defs>
