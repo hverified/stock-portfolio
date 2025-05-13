@@ -59,8 +59,8 @@ const Dashboard = () => {
     };
 
     const pieData = [
-        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "#2b7337" },
-        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "#d92027" },
+        { name: "Won", value: parseFloat(insights.winPercentage || 0), color: "#41a564" },
+        { name: "Lost", value: parseFloat(insights.lossPercentage || 0), color: "#f4796b" },
     ];
 
     return (
