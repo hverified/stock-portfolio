@@ -117,6 +117,7 @@ const Dashboard = () => {
             totalProfit = 0,
             totalLoss = 0,
             totalInvestment = 0,
+            avgInvestment = 0,
             monthWiseMap = {},
             yearlyWiseMap = {};
 
@@ -124,6 +125,7 @@ const Dashboard = () => {
             if (sell_price > 0) {
                 const profitLoss = (sell_price - buy_price) * quantity;
                 totalInvestment += buy_price * quantity;
+                avgInvestment = (((buy_price * quantity) + parseFloat(avgInvestment)) / 2).toFixed(2);
                 profitLoss > 0 ? profitCount++ : lossCount++;
                 totalProfit += Math.max(0, profitLoss);
                 totalLoss += Math.min(0, profitLoss);
@@ -155,7 +157,8 @@ const Dashboard = () => {
             totalInvestment: totalInvestment.toFixed(2),
             totalReturns: (parseFloat(totalInvestment) + parseFloat(netProfitLoss)).toFixed(2),
             // returnOnInvestment: totalInvestment > 0 ? ((netProfitLoss / totalInvestment) * 100).toFixed(2) : 0,
-            returnOnInvestment: (netProfitLoss / 1000).toFixed(2)
+            returnOnInvestment: (netProfitLoss * 100 / (avgInvestment * 2)).toFixed(2),
+            avgInvestment: avgInvestment
         });
 
         setMonthWiseData(
@@ -182,16 +185,16 @@ const Dashboard = () => {
             ),
             color: "rgba(59, 130, 246, 0.2)",
         },
-        // {
-        //     label: "Total Investment",
-        //     value: `₹ ${currencyFormat(insights.totalInvestment)}`,
-        //     icon: (
-        //         <svg className="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        //         </svg>
-        //     ),
-        //     color: "rgba(99, 102, 241, 0.2)",
-        // },
+        {
+            label: "Invested per Trade",
+            value: `₹ ${currencyFormat(insights.avgInvestment)}`,
+            icon: (
+                <svg className="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            ),
+            color: "rgba(99, 102, 241, 0.2)",
+        },
         // {
         //     label: "Total Returns",
         //     value: `₹ ${currencyFormat(insights?.totalReturns)}`,
@@ -217,6 +220,12 @@ const Dashboard = () => {
             color: insights?.netProfitLoss >= 0 ? "rgba(34, 197, 94, 0.2)" : "rgba(239, 68, 68, 0.2)",
         },
         {
+            label: "ROI",
+            value: `${Math.abs(insights.returnOnInvestment)}%`,
+            isPercentage: true,
+            color: insights.returnOnInvestment >= 0 ? "#8b5cf6" : "#e11d48",
+        },
+        {
             label: "Win Rate",
             value: `${insights.winRate}%`,
             isPercentage: true,
@@ -227,12 +236,6 @@ const Dashboard = () => {
             value: `${insights.lossRate}%`,
             isPercentage: true,
             color: "#f43f5e",
-        },
-        {
-            label: "ROI",
-            value: `${Math.abs(insights.returnOnInvestment)}%`,
-            isPercentage: true,
-            color: insights.returnOnInvestment >= 0 ? "#8b5cf6" : "#e11d48",
         },
         {
             label: "Profit Factor",
