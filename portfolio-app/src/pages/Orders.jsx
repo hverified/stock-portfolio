@@ -61,13 +61,10 @@ const Orders = () => {
                     <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-emerald-500"></div>
                 </div>
             ) : (
-                <div className="space-y-3 max-w-md mx-auto">
+                <div className="space-y-8 max-w-md mx-auto">
                     {/* Net Profit/Loss Summary Card */}
                     <div
-                        className={`p-3 rounded-2xl shadow-lg ${netProfitLoss >= 0
-                            ? "border-green-400 bg-gradient-to-r from-emerald-50 to-emerald-100"
-                            : "border-red-400 bg-gradient-to-r from-red-50 to-red-100"
-                            } flex items-center space-x-3 bg-white`}
+                        className={`p-4 rounded-2xl shadow-lg flex items-center space-x-5 bg-white`}
                     >
                         <svg
                             className={`w-6 h-6 ${netProfitLoss >= 0 ? "text-green-600" : "text-red-600"}`}
@@ -96,7 +93,7 @@ const Orders = () => {
                     </div>
 
                     {/* Main white card container for stock orders */}
-                    <div className="bg-white rounded-2xl shadow-md p-4">
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="space-y-4">
                             <h3 className="text-xl font-semibold text-gray-800 mb-3">Orders</h3>
 
