@@ -139,14 +139,13 @@ const Orders = () => {
                                                         ></path>
                                                     </svg>
                                                     <div>
-                                                        <p className="text-lg font-bold text-gray-800">
-                                                            {stock.symbol} <span className="text-xs text-gray-500 font-medium">
-                                                                {formatDate(stock.date)}
-                                                            </span>
+                                                        <p className="text-xs text-gray-500">{formatDate(stock.date)}</p>
+                                                        <p className="text-sm font-semibold text-gray-800">
+                                                            {stock.symbol}
                                                         </p>
-                                                        <p>{(stock.quantity * stock.buy_price).toFixed(2)}</p>
+                                                        <p className="text-sm">{currencyFormat((stock.quantity * stock.buy_price).toFixed(2))}</p>
                                                         <p
-                                                            className={`text-sm font-medium ${!!!stock.sell_price ? "text-yellow-400" : stock.sell_price > stock.buy_price ? "text-green-600" : "text-red-500"}`}
+                                                            className={`text-xs font-medium ${!!!stock.sell_price ? "text-yellow-400" : stock.sell_price > stock.buy_price ? "text-green-600" : "text-red-500"}`}
                                                         >
                                                             {stock.sell_price > stock.buy_price ? "+" : "-"}
                                                             ₹{currencyFormat(
