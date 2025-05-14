@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import Header from "../components/Header";
 
 const LogViewer = () => {
   const [logs, setLogs] = useState([]);
@@ -129,32 +130,12 @@ const LogViewer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8 pb-20">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 tracking-tight">Log Viewer</h2>
-
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      <Header />
+      <div className="max-w-6xl mx-auto space-y-8 mt-8">
         {loading && (
           <div className="flex items-center justify-center h-24">
             <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-emerald-500"></div>
-          </div>
-        )}
-        {error && (
-          <div className="flex items-center space-x-2 text-red-600">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              ></path>
-            </svg>
-            <p className="text-sm">Error: {error}</p>
           </div>
         )}
         {!loading && logs.length === 0 && (
@@ -177,91 +158,105 @@ const LogViewer = () => {
           </div>
         )}
 
-        <div className="space-y-4 animate-fade-in">
-          {logs.map((log, index) => (
-            <div
-              key={index}
-              className={`p-3 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 border-l-4 ${log.level === "ERROR"
-                ? "border-red-400 bg-red-50"
-                : log.level === "WARNING"
-                  ? "border-yellow-400 bg-yellow-50"
-                  : "border-green-400 bg-green-50"
-                }`}
-            >
-              <div className="flex justify-between items-start">
-                <div className="flex items-center space-x-2">
-                  <span
-                    className={`w-2 h-2 rounded-full ${log.level === "ERROR"
-                      ? "bg-red-500"
-                      : log.level === "WARNING"
-                        ? "bg-yellow-500"
-                        : "bg-green-500"
-                      }`}
-                  ></span>
-                  <div>
-                    <p className="text-sm font-medium text-gray-800">
-                      {log.filename} - {log.function}
-                    </p>
-                    <div className="flex items-center space-x-1">
-                      {getLogIcon(log.level)}
-                      <p
-                        className={`text-xs font-semibold ${log.level === "ERROR"
-                          ? "text-red-600"
-                          : log.level === "WARNING"
-                            ? "text-yellow-600"
-                            : "text-green-600"
-                          }`}
-                      >
-                        {log.level}
+        {/* <div className="space-y-4 animate-fade-in"> */}
+        <div
+          className={`p-4 rounded-2xl shadow-lg bg-white transform hover:scale-105 
+            transition-transform duration-300 animate-fade-in`}
+        >
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold text-gray-800 mb-3">Application Logs</h3>
+            <p className="text-xs text-gray-500 mb-4">
+              Last updated at{" "}
+              {new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+            {logs.map((log, index) => (
+              <div
+                key={index}
+                className={`p-3 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 ${log.level === "ERROR"
+                  ? "border-red-400 bg-red-50"
+                  : log.level === "WARNING"
+                    ? "border-yellow-400 bg-yellow-50"
+                    : "border-green-400 bg-green-50"
+                  }`}
+              >
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center space-x-2">
+                    <span
+                      className={`w-2 h-2 rounded-full ${log.level === "ERROR"
+                        ? "bg-red-500"
+                        : log.level === "WARNING"
+                          ? "bg-yellow-500"
+                          : "bg-green-500"
+                        }`}
+                    ></span>
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">
+                        {log.filename} - {log.function}
                       </p>
+                      <div className="flex items-center space-x-1">
+                        {getLogIcon(log.level)}
+                        <p
+                          className={`text-xs font-semibold ${log.level === "ERROR"
+                            ? "text-red-600"
+                            : log.level === "WARNING"
+                              ? "text-yellow-600"
+                              : "text-green-600"
+                            }`}
+                        >
+                          {log.level}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <p className="text-xs text-gray-500 text-right">
+                    {log.timestamp === "Invalid Date"
+                      ? "Invalid Timestamp"
+                      : formatISTTimestamp(log.timestamp)}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-500 text-right">
-                  {log.timestamp === "Invalid Date"
-                    ? "Invalid Timestamp"
-                    : formatISTTimestamp(log.timestamp)}
+                <p className="mt-1 text-xs text-gray-700">
+                  {log.parsedMessage?.plainText || log.message}
                 </p>
+                {log.parsedMessage?.formattedJSON && (
+                  <div className="mt-2">
+                    <button
+                      onClick={() => toggleJSON(index)}
+                      className="text-xs text-gray-600 hover:text-gray-800 flex items-center space-x-1"
+                    >
+                      <svg
+                        className={`w-4 h-4 transform ${expandedLogs[index] ? "rotate-180" : ""
+                          }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                      <span>{expandedLogs[index] ? "Hide JSON" : "Show JSON"}</span>
+                    </button>
+                    {expandedLogs[index] && (
+                      <SyntaxHighlighter
+                        language="json"
+                        style={vs2015}
+                        className="mt-1 p-2 rounded-lg text-xs border border-gray-200 max-h-32 overflow-auto"
+                      >
+                        {JSON.stringify(log.parsedMessage.formattedJSON, null, 2)}
+                      </SyntaxHighlighter>
+                    )}
+                  </div>
+                )}
               </div>
-              <p className="mt-1 text-xs text-gray-700">
-                {log.parsedMessage?.plainText || log.message}
-              </p>
-              {log.parsedMessage?.formattedJSON && (
-                <div className="mt-2">
-                  <button
-                    onClick={() => toggleJSON(index)}
-                    className="text-xs text-gray-600 hover:text-gray-800 flex items-center space-x-1"
-                  >
-                    <svg
-                      className={`w-4 h-4 transform ${expandedLogs[index] ? "rotate-180" : ""
-                        }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                    <span>{expandedLogs[index] ? "Hide JSON" : "Show JSON"}</span>
-                  </button>
-                  {expandedLogs[index] && (
-                    <SyntaxHighlighter
-                      language="json"
-                      style={vs2015}
-                      className="mt-1 p-2 rounded-lg text-xs border border-gray-200 max-h-32 overflow-auto"
-                    >
-                      {JSON.stringify(log.parsedMessage.formattedJSON, null, 2)}
-                    </SyntaxHighlighter>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

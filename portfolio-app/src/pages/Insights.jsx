@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import currencyFormat from "../utils/helperFunction";
+import Header from "../components/Header";
 
 const MetricsCard = ({ metrics }) => (
     <div className="p-4 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/30 shadow-lg hover:shadow-xl transition-all duration-300">
@@ -278,7 +279,7 @@ const Dashboard = () => {
     }));
 
     return (
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
             <style>{`
                 @keyframes fadeInUp {
                     from {
@@ -299,15 +300,14 @@ const Dashboard = () => {
                     transition: all 0.2s ease-in-out;
                 }
             `}</style>
-            <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Trading Dashboard</h2>
-
+            <div className="max-w-6xl mx-auto space-y-8 mt-8">
+                <Header />
                 {loading ? (
                     <div className="flex justify-center items-center h-48">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
                     </div>
                 ) : (
-                    <div className="space-y-8">
+                    <div className="space-y-4">
                         <MetricsCard metrics={metrics} />
 
                         {monthWiseData.length > 0 && (

@@ -115,7 +115,7 @@ const Orders = () => {
                                         <div key={stock.symbol + index}>
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div
-                                                    className={`p-3 rounded-xl flex items-center space-x-3
+                                                    className={`p-3 rounded-xl flex shadow-lg items-center space-x-3
                                                          ${!!!stock.sell_price ? "border-yellow-400 bg-yellow-50" : stock.sell_price > stock.buy_price
                                                             ? "border-green-400 bg-green-50"
                                                             : "border-red-300 bg-red-50"
