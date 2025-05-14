@@ -106,10 +106,10 @@ const Orders = () => {
                                         <div
                                             key={stock.symbol + index}
                                             className={`p-3 rounded-xl shadow-sm flex items-center justify-between ${stock.status === "bought"
-                                                ? "border-green-400 bg-green-100"
+                                                ? "border-green-400 bg-green-50"
                                                 : stock.status === "sold"
-                                                    ? "border-gray-300 bg-gray-100"
-                                                    : "border-yellow-400 bg-yellow-100"
+                                                    ? "border-gray-300 bg-gray-50"
+                                                    : "border-yellow-400 bg-yellow-50"
                                                 }`}
                                         >
                                             <div className="flex items-center space-x-3">
