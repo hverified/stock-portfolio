@@ -83,7 +83,7 @@ const MarketCard = () => {
                                 } flex items-center space-x-3`}
                         >
                             <svg
-                                className="w-6 h-6 text-gray-500"
+                                className={`w-6 h-6 ${marketData.nifty50.change >= 0 ? "text-green-600" : "text-red-600"}`}
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -93,7 +93,9 @@ const MarketCard = () => {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
-                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                                    d={marketData.nifty50.change >= 0
+                                        ? "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                                        : "M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"}
                                 ></path>
                             </svg>
                             <div>
@@ -102,8 +104,7 @@ const MarketCard = () => {
                                     ₹{currencyFormat(marketData.nifty50.price.toFixed(2))}
                                 </p>
                                 <p
-                                    className={`text-sm font-medium ${marketData.nifty50.change >= 0 ? "text-green-600" : "text-red-600"
-                                        }`}
+                                    className={`text-sm font-medium ${marketData.nifty50.change >= 0 ? "text-green-600" : "text-red-600"}`}
                                 >
                                     {marketData.nifty50.change >= 0 ? "+" : "-"}₹
                                     {currencyFormat(Math.abs(marketData.nifty50.change).toFixed(2))} (
@@ -119,7 +120,7 @@ const MarketCard = () => {
                                 } flex items-center space-x-3`}
                         >
                             <svg
-                                className="w-6 h-6 text-gray-500"
+                                className={`w-6 h-6 ${marketData.sensex.change >= 0 ? "text-green-600" : "text-red-600"}`}
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -129,7 +130,9 @@ const MarketCard = () => {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                    d={marketData.sensex.change >= 0
+                                        ? "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                                        : "M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"}
                                 ></path>
                             </svg>
                             <div>
@@ -138,8 +141,7 @@ const MarketCard = () => {
                                     ₹{currencyFormat(marketData.sensex.price.toFixed(2))}
                                 </p>
                                 <p
-                                    className={`text-sm font-medium ${marketData.sensex.change >= 0 ? "text-green-600" : "text-red-600"
-                                        }`}
+                                    className={`text-sm font-medium ${marketData.sensex.change >= 0 ? "text-green-600" : "text-red-600"}`}
                                 >
                                     {marketData.sensex.change >= 0 ? "+" : "-"}₹
                                     {currencyFormat(Math.abs(marketData.sensex.change).toFixed(2))} (
