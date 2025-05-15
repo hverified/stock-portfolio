@@ -10,20 +10,20 @@ const NavbarLink = ({ to, icon, label }) => {
             aria-label={label}
             className={({ isActive }) =>
                 `flex flex-col items-center relative p-2 sm:p-3 md:p-2.5 rounded-xl transition-all duration-200 transform active:scale-90 hover:scale-110 hover:shadow-md ${isActive
-                    ? "text-blue-700 bg-blue-100/80"
-                    : "text-gray-600 hover:text-blue-600 hover:bg-blue-50/70"
+                    ? "text-emerald-700 bg-emerald-100/80"
+                    : "text-gray-600 hover:text-emerald-600 hover:bg-emerald-50/70"
                 }`
             }
         >
             {({ isActive }) => (
                 <>
                     <div
-                        className={`p-2 sm:p-2.5 rounded-full transition-all duration-200 ${isActive ? "bg-blue-100/70 scale-110 shadow-sm" : "bg-transparent"
+                        className={`p-2 sm:p-2.5 rounded-full transition-all duration-200 ${isActive ? "bg-emerald-100/70 scale-110 shadow-sm" : "bg-transparent"
                             }`}
                     >
                         <FontAwesomeIcon
                             icon={icon}
-                            className={`w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 ${isActive ? "text-blue-700" : "text-gray-600 opacity-60"
+                            className={`w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 ${isActive ? "text-emerald-700" : "text-gray-600 opacity-60"
                                 }`}
                         />
                     </div>
@@ -66,7 +66,11 @@ const Navbar = () => {
     ];
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 w-full max-w-2xl mx-auto bg-gradient-to-t from-blue-50/50 to-white/95 backdrop-blur-xl shadow-xl hover:shadow-2xl rounded-t-3xl flex justify-around items-center py-2 sm:py-4 h-16 sm:h-20 z-50 transition-all duration-300 animate-slide-in-up border-t border-blue-200/50 supports-[backdrop-filter]:bg-white/80">
+        <div className="fixed bottom-0 left-0 right-0 w-full max-w-2xl mx-auto 
+        bg-gradient-to-t from-emerald-50/50 to-white/95 backdrop-blur-xl shadow-xl 
+        hover:shadow-2xl rounded-t-3xl flex justify-around items-center py-2 sm:py-4 
+        h-16 sm:h-20 z-50 transition-all duration-300 animate-slide-in-up border-t 
+        border-emerald-200/50 supports-[backdrop-filter]:bg-white/80">
             <style>{`
         @keyframes slideInUp {
           from {
