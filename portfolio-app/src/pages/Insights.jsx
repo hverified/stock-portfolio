@@ -4,38 +4,47 @@ import currencyFormat from "../utils/helperFunction";
 import Header from "../components/Header";
 
 const MetricsCard = ({ metrics }) => (
-    <div className="p-4 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/30 shadow-lg hover:shadow-xl transition-all duration-300">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Key Metrics</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+    <div className="p-4 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/30 shadow-lg hover:shadow-xl transition-all duration-300 space-y-4 sm:space-y-6">
+        <div className="space-y-2 text-left">
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">Key Metrics</h3>
+            <p className="text-xs sm:text-sm text-gray-500">
+                Last updated at{" "}
+                {new Date().toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                })}
+            </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {metrics.map(({ label, value, icon, color, isPercentage }, index) => {
                 const percentage = isPercentage ? parseFloat(value) : null;
-                const radius = 10;
+                const radius = 12;
                 const circumference = 2 * Math.PI * radius;
                 const strokeDashoffset = percentage ? circumference - (percentage / 100) * circumference : 0;
 
                 return (
                     <div
                         key={index}
-                        className="flex items-center p-3 sm:p-4 rounded-xl bg-gray-50/70 hover:bg-gray-100/70 transition-all duration-300 animate-fade-in-up border border-gray-100/30"
-                        style={{ animationDelay: `${index * 0.05}s` }}
+                        className="flex items-center justify-between p-3 sm:p-4 rounded-lg bg-blue-50 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 animate-fade-in-up"
+                        style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         {isPercentage ? (
-                            <svg className="w-8 h-8 sm:w-10 sm:h-10 mr-2 sm:mr-3" viewBox="0 0 24 24">
+                            <svg className="w-10 h-10 sm:w-12 sm:h-12 mr-2 sm:mr-3 flex-shrink-0" viewBox="0 0 28 28">
                                 <circle
-                                    cx="12"
-                                    cy="12"
+                                    cx="14"
+                                    cy="14"
                                     r={radius}
                                     fill="none"
                                     stroke="rgba(229, 231, 235, 0.3)"
-                                    strokeWidth="2.5"
+                                    strokeWidth="3"
                                 />
                                 <circle
-                                    cx="12"
-                                    cy="12"
+                                    cx="14"
+                                    cy="14"
                                     r={radius}
                                     fill="none"
                                     stroke={color}
-                                    strokeWidth="2.5"
+                                    strokeWidth="3"
                                     strokeDasharray={circumference}
                                     strokeDashoffset={strokeDashoffset}
                                     className="transition-all duration-800 ease-in-out"
@@ -43,13 +52,13 @@ const MetricsCard = ({ metrics }) => (
                                 />
                             </svg>
                         ) : (
-                            <div className="p-1.5 sm:p-2 rounded-full mr-2 sm:mr-3" style={{ backgroundColor: color }}>
-                                {React.cloneElement(icon, { className: `${icon.props.className} w-4 h-4 sm:w-5 sm:h-5` })}
+                            <div className="p-2 sm:p-2.5 rounded-full mr-2 sm:mr-3 flex-shrink-0" style={{ backgroundColor: color }}>
+                                {React.cloneElement(icon, { className: `${icon.props.className} w-5 h-5 sm:w-6 sm:h-6` })}
                             </div>
                         )}
-                        <div>
-                            <p className="text-[10px] sm:text-xs font-medium text-gray-600 uppercase tracking-wide">{label}</p>
-                            <p className="text-base sm:text-lg font-bold text-gray-900 mt-0.5 sm:mt-1">{value}</p>
+                        <div className="min-w-0 flex-1">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-wide truncate">{label}</p>
+                            <p className="text-lg sm:text-xl font-bold text-gray-900 mt-0.5 sm:mt-1 break-words">{value}</p>
                         </div>
                     </div>
                 );
@@ -59,27 +68,27 @@ const MetricsCard = ({ metrics }) => (
 );
 
 const ChartCard = ({ title, children }) => (
-    <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-lg border border-gray-200/30">
-        <h3 className="text-xl font-semibold text-gray-900 mb-6">{title}</h3>
+    <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200/30">
+        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6">{title}</h3>
         {children}
     </div>
 );
 
 const PerformanceTable = ({ title, data, keyField, valueField }) => (
-    <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-lg border border-gray-200/30 overflow-x-auto">
-        <h3 className="text-xl font-semibold text-gray-900 mb-6">{title}</h3>
+    <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200/30 overflow-x-auto">
+        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6">{title}</h3>
         <table className="w-full text-sm text-left">
             <thead className="bg-gray-100/70">
                 <tr>
-                    <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase">{keyField}</th>
-                    <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-right">Profit/Loss</th>
+                    <th className="px-4 sm:px-6 py-2 sm:py-3 text-xs font-medium text-gray-500 uppercase">{keyField}</th>
+                    <th className="px-4 sm:px-6 py-2 sm:py-3 text-xs font-medium text-gray-500 uppercase text-right">Profit/Loss</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map((item) => (
                     <tr key={item[keyField]} className="border-t border-gray-200/20 hover:bg-gray-50/70">
-                        <td className="px-6 py-4 font-medium text-gray-800">{item[keyField]}</td>
-                        <td className={`px-6 py-4 text-right font-semibold ${item[valueField] >= 0 ? "text-green-600" : "text-red-600"}`}>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 font-medium text-gray-800">{item[keyField]}</td>
+                        <td className={`px-4 sm:px-6 py-3 sm:py-4 text-right font-semibold ${item[valueField] >= 0 ? "text-green-600" : "text-red-600"}`}>
                             ₹ {currencyFormat(item[valueField])}
                         </td>
                     </tr>
@@ -94,12 +103,13 @@ const Dashboard = () => {
     const [monthWiseData, setMonthWiseData] = useState([]);
     const [yearlyWiseData, setYearlyWiseData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
     useEffect(() => {
         const fetchStockData = async () => {
             try {
                 const response = await fetch(`${baseUrl}/screener/stocks`);
+                if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
                 const data = await response.json();
                 if (Array.isArray(data)) processStockData(data);
             } catch (error) {
@@ -156,9 +166,8 @@ const Dashboard = () => {
             avgLossPerTrade: lossCount > 0 ? (Math.abs(totalLoss) / lossCount).toFixed(2) : 0,
             totalInvestment: totalInvestment.toFixed(2),
             totalReturns: (parseFloat(totalInvestment) + parseFloat(netProfitLoss)).toFixed(2),
-            // returnOnInvestment: totalInvestment > 0 ? ((netProfitLoss / totalInvestment) * 100).toFixed(2) : 0,
             returnOnInvestment: (netProfitLoss * 100 / (avgInvestment * 2)).toFixed(2),
-            avgInvestment: avgInvestment
+            avgInvestment: avgInvestment,
         });
 
         setMonthWiseData(
@@ -195,16 +204,6 @@ const Dashboard = () => {
             ),
             color: "rgba(99, 102, 241, 0.2)",
         },
-        // {
-        //     label: "Total Returns",
-        //     value: `₹ ${currencyFormat(insights?.totalReturns)}`,
-        //     icon: (
-        //         <svg className={`w-6 h-6 ${insights?.netProfitLoss >= 0 ? "text-green-600" : "text-red-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        //         </svg>
-        //     ),
-        //     color: insights?.netProfitLoss >= 0 ? "rgba(34, 197, 94, 0.2)" : "rgba(239, 68, 68, 0.2)",
-        // },
         {
             label: "Net Profit/Loss",
             value: `₹ ${currencyFormat(insights?.netProfitLoss)}`,
@@ -282,44 +281,48 @@ const Dashboard = () => {
     }));
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 sm:p-8 sm:pb-24">
             <style>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(15px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                .animate-fade-in-up {
-                    animation: fadeInUp 0.4s ease-out forwards;
-                }
-                .bar:hover {
-                    opacity: 0.9;
-                    transform: scale(1.02);
-                    transition: all 0.2s ease-in-out;
-                }
-            `}</style>
-            <div className="max-w-6xl mx-auto space-y-8 mt-8">
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.4s ease-out forwards;
+        }
+        .bar:hover {
+          opacity: 0.9;
+          transform: scale(1.02);
+          transition: all 0.2s ease-in-out;
+        }
+      `}</style>
+            <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 animate-fade-in">
                 <Header />
                 {loading ? (
                     <div className="flex justify-center items-center h-48">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+                        <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-blue-500"></div>
                     </div>
                 ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-4 sm:space-y-6">
                         <MetricsCard metrics={metrics} />
-
                         {monthWiseData.length > 0 && (
                             <ChartCard title="Monthly Profit & Loss">
-                                <ResponsiveContainer width="100%" height={350}>
-                                    <BarChart data={monthlyBarData} margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart
+                                        data={monthlyBarData}
+                                        margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
+                                        barGap={4}
+                                        barCategoryGap={10}
+                                    >
                                         <CartesianGrid strokeDasharray="4 4" stroke="rgba(229, 231, 235, 0.3)" />
-                                        <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }} />
-                                        <YAxis tickFormatter={(value) => `₹${currencyFormat(value)}`} tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }} />
+                                        <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#6b7280", fontWeight: 500 }} />
+                                        <YAxis tickFormatter={(value) => `₹${currencyFormat(value)}`} tick={{ fontSize: 10, fill: "#6b7280", fontWeight: 500 }} />
                                         <Tooltip
                                             formatter={(value) => `₹${currencyFormat(value)}`}
                                             labelFormatter={(label) => `Month: ${label}`}
@@ -328,11 +331,12 @@ const Dashboard = () => {
                                                 borderRadius: "8px",
                                                 border: "1px solid rgba(229, 231, 235, 0.5)",
                                                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.05)",
+                                                fontSize: 12,
                                             }}
                                         />
-                                        <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
-                                        <Bar dataKey="Profit" fill="url(#profitGradient)" name="Profit" radius={[6, 6, 0, 0]} className="bar" />
-                                        <Bar dataKey="Loss" fill="url(#lossGradient)" name="Loss" radius={[6, 6, 0, 0]} className="bar" />
+                                        <Legend wrapperStyle={{ fontSize: 10, paddingTop: 10 }} />
+                                        <Bar dataKey="Profit" fill="url(#profitGradient)" name="Profit" radius={[6, 6, 0, 0]} className="bar" barSize={20} />
+                                        <Bar dataKey="Loss" fill="url(#lossGradient)" name="Loss" radius={[6, 6, 0, 0]} className="bar" barSize={20} />
                                         <defs>
                                             <linearGradient id="profitGradient" x1="0" y1="0" x2="0" y2="1">
                                                 <stop offset="0%" stopColor="#34d399" stopOpacity={0.9} />
@@ -347,14 +351,18 @@ const Dashboard = () => {
                                 </ResponsiveContainer>
                             </ChartCard>
                         )}
-
                         {yearlyWiseData.length > 0 && (
                             <ChartCard title="Yearly Profit & Loss">
-                                <ResponsiveContainer width="100%" height={350}>
-                                    <BarChart data={yearlyBarData} margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart
+                                        data={yearlyBarData}
+                                        margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
+                                        barGap={4}
+                                        barCategoryGap={10}
+                                    >
                                         <CartesianGrid strokeDasharray="4 4" stroke="rgba(229, 231, 235, 0.3)" />
-                                        <XAxis dataKey="year" tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }} />
-                                        <YAxis tickFormatter={(value) => `₹${currencyFormat(value)}`} tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }} />
+                                        <XAxis dataKey="year" tick={{ fontSize: 10, fill: "#6b7280", fontWeight: 500 }} />
+                                        <YAxis tickFormatter={(value) => `₹${currencyFormat(value)}`} tick={{ fontSize: 10, fill: "#6b7280", fontWeight: 500 }} />
                                         <Tooltip
                                             formatter={(value) => `₹${currencyFormat(value)}`}
                                             labelFormatter={(label) => `Year: ${label}`}
@@ -363,11 +371,12 @@ const Dashboard = () => {
                                                 borderRadius: "8px",
                                                 border: "1px solid rgba(229, 231, 235, 0.5)",
                                                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.05)",
+                                                fontSize: 12,
                                             }}
                                         />
-                                        <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
-                                        <Bar dataKey="Profit" fill="url(#profitGradient)" name="Profit" radius={[6, 6, 0, 0]} className="bar" />
-                                        <Bar dataKey="Loss" fill="url(#lossGradient)" name="Loss" radius={[6, 6, 0, 0]} className="bar" />
+                                        <Legend wrapperStyle={{ fontSize: 10, paddingTop: 10 }} />
+                                        <Bar dataKey="Profit" fill="url(#profitGradient)" name="Profit" radius={[6, 6, 0, 0]} className="bar" barSize={20} />
+                                        <Bar dataKey="Loss" fill="url(#lossGradient)" name="Loss" radius={[6, 6, 0, 0]} className="bar" barSize={20} />
                                         <defs>
                                             <linearGradient id="profitGradient" x1="0" y1="0" x2="0" y2="1">
                                                 <stop offset="0%" stopColor="#34d399" stopOpacity={0.9} />
@@ -382,11 +391,9 @@ const Dashboard = () => {
                                 </ResponsiveContainer>
                             </ChartCard>
                         )}
-
                         {monthWiseData.length > 0 && (
                             <PerformanceTable title="Monthly Performance" data={monthWiseData} keyField="month" valueField="profitLoss" />
                         )}
-
                         {yearlyWiseData.length > 0 && (
                             <PerformanceTable title="Yearly Performance" data={yearlyWiseData} keyField="year" valueField="profitLoss" />
                         )}

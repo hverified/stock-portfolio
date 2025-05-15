@@ -1,43 +1,28 @@
-/* Navbar.css */
-
 .navbar {
-    width: 100%;
-    padding: 10px 0;
-    background-color: #333;
-    /* Adjust to your desired color */
-}
-
-.navbar-content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 896px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem 1rem 0 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    width: 100%;
+    padding: 12px 0;
+    height: 64px;
+    animation: fadeInUp 0.5s ease-out;
 }
 
-.navbar-logo {
-    margin-right: 20px;
-    /* Space between logo and links */
+@media (min-width: 640px) {
+    .navbar {
+        padding: 16px 0;
+        height: 80px;
+    }
 }
 
-.navbar-logo img {
-    height: 40px;
-    /* Adjust the logo size as needed */
-}
-
-.navbar-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.navbar-link {
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.navbar-link:hover {
-    color: #f1f1f1;
-    /* Hover effect */
-}
+/* Add more styles for links, active states, etc. */
