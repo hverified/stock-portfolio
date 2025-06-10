@@ -28,8 +28,12 @@ const Orders = () => {
             console.log("Fetched data:", data);
 
             if (Array.isArray(data)) {
-                setStockOrders(data);
-                calculateNetProfitLoss(data);
+                const updatedData = data.map(stock => ({
+                    ...stock,
+                    oneWeekLaterDate: new Date(new Date(stock.date).getTime() + 7 * 24 * 60 * 60 * 1000)
+                }));
+                setStockOrders(updatedData);
+                calculateNetProfitLoss(updatedData);
             } else {
                 setStockOrders([]);
                 setNetProfitLoss(0);
@@ -165,6 +169,11 @@ const Orders = () => {
                                                         <p className="text-xs sm:text-sm text-gray-600">
                                                             Qty: {stock.quantity}
                                                         </p>
+                                                        <div className="pt-2 border-t border-gray-200">
+                                                            <p className="text-xs sm:text-sm text-gray-700 font-medium">
+                                                                {formatDate(stock.oneWeekLaterDate)}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                     <div className="space-y-1 text-right">
                                                         <p className="text-xs sm:text-sm text-gray-600">
@@ -195,6 +204,33 @@ const Orders = () => {
                                                                 ).toFixed(2)}%)`
                                                                 : "Pending"}
                                                         </p>
+                                                        <div className="pt-2 border-t border-gray-200">
+                                                            <p className="text-xs sm:text-sm text-gray-600">
+                                                                Sell (1W): ₹
+                                                                {stock.sell_price_at_1wk
+                                                                    ? currencyFormat(stock.sell_price_at_1wk.toFixed(2))
+                                                                    : "N/A"}
+                                                            </p>
+                                                            <p
+                                                                className={`text-xs sm:text-sm font-medium ${!stock.sell_price_at_1wk
+                                                                    ? "text-yellow-600"
+                                                                    : stock.sell_price_at_1wk > stock.buy_price
+                                                                        ? "text-green-600"
+                                                                        : "text-red-600"
+                                                                    }`}
+                                                            >
+                                                                {stock.sell_price_at_1wk
+                                                                    ? `${stock.sell_price_at_1wk > stock.buy_price ? "+" : "-"}₹${currencyFormat(
+                                                                        Math.abs(
+                                                                            (stock.sell_price_at_1wk - stock.buy_price) * stock.quantity
+                                                                        ).toFixed(2)
+                                                                    )} (${Math.abs(
+                                                                        ((stock.sell_price_at_1wk - stock.buy_price) * 100) /
+                                                                        stock.buy_price
+                                                                    ).toFixed(2)}%)`
+                                                                    : "Pending"}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
